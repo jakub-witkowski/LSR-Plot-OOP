@@ -17,7 +17,7 @@ int main(int argc, char** argv)
     TData * dataset = new TData(argv[1]);
 
     dataset->load_input();
-    //display_raw_data(dataset);
+    //dataset->display_raw_data();
     //display_member_vector_dbl(dataset, 'a');
 
     /* Test if data is sorted */

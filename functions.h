@@ -4,12 +4,6 @@
 #include <iostream>
 #include "tdata.h"
 
-void display_raw_data(TData* d)
-{
-    for (auto it : d->raw_data)
-        std::cout << it << std::endl;
-}
-
 void display_member_vector_dbl(TData* d, char c)
 {
     switch(c)

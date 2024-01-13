@@ -34,6 +34,24 @@ void TData::load_input()
 //    data_ptr = &raw_data[0];
 }
 
+void TData::display_raw_data()
+{
+    for (int i = 0; i < get_raw_data_size(); i++)
+    {
+        std::cout << get_raw_data(i) << std::endl;
+    }
+}
+
+size_t TData::get_raw_data_size()
+{
+    return this->raw_data.size();
+}
+
+std::string TData::get_raw_data(int i)
+{
+    return this->raw_data[i];
+}
+
 /* sets the value of a vector row */
 void TData::set_raw_data(std::string l)
 {

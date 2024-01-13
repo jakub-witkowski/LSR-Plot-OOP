@@ -18,9 +18,10 @@ public:
     void display_raw_data();
     void display_ages_vector();
     void display_depths_vector();
+    bool is_ages_vector_sorted();
+    bool is_depths_vector_sorted();
+    bool test_input_order();
 
-    friend void display_member_vector_dbl(TData*, char);
-    friend bool is_data_sorted(TData*, char);
     friend int find_hiatus(TData*);
 
 /* setter functions */

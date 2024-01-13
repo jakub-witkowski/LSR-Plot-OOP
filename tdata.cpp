@@ -61,6 +61,39 @@ void TData::display_depths_vector()
     }
 }
 
+bool TData::is_ages_vector_sorted()
+{
+    bool result{true};
+
+    for (int i = 1; i < get_ages_vector_size(); i++)
+    {
+        if (get_ages(i) < get_ages(i-1))
+            result = false;
+    }
+
+    return result;
+}
+
+bool TData::is_depths_vector_sorted()
+{
+    bool result{true};
+
+    for (int i = 1; i < get_depths_vector_size(); i++)
+    {
+        if (get_depths(i) < get_depths(i-1))
+            result = false;
+    }
+
+    return result;
+}
+
+bool TData::test_input_order()
+{
+    bool a = is_ages_vector_sorted();
+    bool d = is_depths_vector_sorted();
+    return ((a == true) && (d == true) ? true : false);
+}
+
 size_t TData::get_raw_data_size()
 {
     return this->raw_data.size();

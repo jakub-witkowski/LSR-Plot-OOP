@@ -17,18 +17,12 @@ int main(int argc, char** argv)
     TData * dataset = new TData(argv[1]);
 
     dataset->load_input();
-    dataset->display_raw_data();
-    dataset->display_ages_vector();
-    dataset->display_depths_vector();
+    // dataset->display_raw_data();
+    // dataset->display_ages_vector();
+    // dataset->display_depths_vector();
 
     /* Test if data is sorted */
-    if (!is_data_sorted(dataset, 'd'))
-    {
-        std::cout << "The data is not properly sorted; inspect the file: " << dataset->filename << " and try again." << std::endl;
-        exit(EXIT_FAILURE);
-    }
-
-    if (!is_data_sorted(dataset, 'a'))
+    if (!dataset->test_input_order())
     {
         std::cout << "The data is not properly sorted; inspect the file: " << dataset->filename << " and try again." << std::endl;
         exit(EXIT_FAILURE);

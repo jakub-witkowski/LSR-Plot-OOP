@@ -16,6 +16,8 @@ public:
 
     void load_input();
     void display_raw_data();
+    void display_ages_vector();
+    void display_depths_vector();
 
     friend void display_member_vector_dbl(TData*, char);
     friend bool is_data_sorted(TData*, char);
@@ -28,7 +30,11 @@ public:
 
 /* getter functions */
     size_t get_raw_data_size();
+    size_t get_ages_vector_size();
+    size_t get_depths_vector_size();
     std::string get_raw_data(int);
+    double get_ages(int);
+    double get_depths(int);
 
 private:
     std::vector<std::string> raw_data{};

@@ -36,9 +36,28 @@ void TData::load_input()
 
 void TData::display_raw_data()
 {
+    std::cout << "Data in the raw_data vector: " << std::endl;
     for (int i = 0; i < get_raw_data_size(); i++)
     {
         std::cout << get_raw_data(i) << std::endl;
+    }
+}
+
+void TData::display_ages_vector()
+{
+    std::cout << "Data in the ages vector: " << std::endl;
+    for (int i = 0; i < get_ages_vector_size(); i++)
+    {
+        std::cout << get_ages(i) << std::endl;
+    }
+}
+
+void TData::display_depths_vector()
+{
+    std::cout << "Data in the depths vector: " << std::endl;
+    for (int i = 0; i < get_depths_vector_size(); i++)
+    {
+        std::cout << get_depths(i) << std::endl;
     }
 }
 
@@ -47,9 +66,29 @@ size_t TData::get_raw_data_size()
     return this->raw_data.size();
 }
 
+size_t TData::get_ages_vector_size()
+{
+    return this->ages.size();
+}
+
+size_t TData::get_depths_vector_size()
+{
+    return this->depths.size();
+}
+
 std::string TData::get_raw_data(int i)
 {
     return this->raw_data[i];
+}
+
+double TData::get_ages(int i)
+{
+    return this->ages[i];
+}
+
+double TData::get_depths(int i)
+{
+    return this->depths[i];
 }
 
 /* sets the value of a vector row */

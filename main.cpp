@@ -17,8 +17,9 @@ int main(int argc, char** argv)
     TData * dataset = new TData(argv[1]);
 
     dataset->load_input();
-    //dataset->display_raw_data();
-    //display_member_vector_dbl(dataset, 'a');
+    dataset->display_raw_data();
+    dataset->display_ages_vector();
+    dataset->display_depths_vector();
 
     /* Test if data is sorted */
     if (!is_data_sorted(dataset, 'd'))

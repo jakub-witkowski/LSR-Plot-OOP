@@ -1,5 +1,8 @@
 # VS Code project folder
 .vscode/
 
+#abandoned file
+functions.h
+
 #compiled binary file
 plot

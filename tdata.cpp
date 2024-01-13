@@ -94,6 +94,20 @@ bool TData::test_input_order()
     return ((a == true) && (d == true) ? true : false);
 }
 
+int TData::find_hiatus()
+{
+    int number_of_hiatuses{};
+
+    for (int i = 1; i < this->get_depths_vector_size(); i++)
+    {
+        if (this->get_depths(i) == this->get_depths(i-1))
+            number_of_hiatuses++;
+    }
+
+    return number_of_hiatuses;
+}
+
+/* getter functions */
 size_t TData::get_raw_data_size()
 {
     return this->raw_data.size();
@@ -124,7 +138,7 @@ double TData::get_depths(int i)
     return this->depths[i];
 }
 
-/* sets the value of a vector row */
+/* setter functions */
 void TData::set_raw_data(std::string l)
 {
     this->raw_data.push_back(l);

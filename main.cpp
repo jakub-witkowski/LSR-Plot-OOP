@@ -1,8 +1,6 @@
 #include "tdata.h"
-//#include "tplot.h"
-#include "functions.h"
+// #include "functions.h"
 #include <iostream>
-//#include "tsegment.h"
 
 int number_of_segments{};
 
@@ -27,6 +25,8 @@ int main(int argc, char** argv)
         std::cout << "The data is not properly sorted; inspect the file: " << dataset->filename << " and try again." << std::endl;
         exit(EXIT_FAILURE);
     }
+
+    std::cout << "Number of segments: " << dataset->find_hiatus() + 1 << std::endl;
 
     dataset->~TData();
 

@@ -21,8 +21,7 @@ public:
     bool is_ages_vector_sorted();
     bool is_depths_vector_sorted();
     bool test_input_order();
-
-    friend int find_hiatus(TData*);
+    int find_hiatus();
 
 /* setter functions */
     void set_raw_data(std::string);

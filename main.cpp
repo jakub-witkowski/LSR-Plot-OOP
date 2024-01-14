@@ -1,8 +1,10 @@
 #include "tdata.h"
+#include "tsegment.h"
 // #include "functions.h"
 #include <iostream>
 
 int number_of_segments{};
+std::vector<TSegment*> segments{}; 
 
 int main(int argc, char** argv)
 {
@@ -27,6 +29,11 @@ int main(int argc, char** argv)
     }
 
     std::cout << "Number of segments: " << dataset->find_hiatus() + 1 << std::endl;
+
+    for (int i = 0; i < number_of_segments; i++)
+    {
+        segments.push_back(new TSegment());
+    }
 
     dataset->~TData();
 

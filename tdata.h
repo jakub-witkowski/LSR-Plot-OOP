@@ -1,6 +1,8 @@
 #ifndef TDATA_H
 #define TDATA_H
 
+#include "tsegment.h"
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -22,11 +24,14 @@ public:
     bool is_depths_vector_sorted();
     bool test_input_order();
     int find_hiatus();
+    std::pair<int,int> make_index(int, int);
+//    TSegment create_segments(int, int);
 
 /* setter functions */
     void set_raw_data(std::string);
     void set_ages(double);
     void set_depths(double);
+    void set_segment_index(std::pair<int,int>);
 
 /* getter functions */
     size_t get_raw_data_size();
@@ -40,6 +45,7 @@ private:
     std::vector<std::string> raw_data{};
     std::vector<double> ages{};
     std::vector<double> depths{};
+    std::vector<std::pair<int,int>> segment_indexes{};
 
 };
 

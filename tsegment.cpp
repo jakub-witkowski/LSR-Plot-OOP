@@ -1,4 +1,5 @@
 #include "tsegment.h"
+#include <iostream>
 
 TSegment::TSegment()
 {

@@ -57,7 +57,7 @@ void TData::display_depths_vector()
     std::cout << "Data in the depths vector: " << std::endl;
     for (int i = 0; i < get_depths_vector_size(); i++)
     {
-        std::cout << get_depths(i) << std::endl;
+        std::cout << i << ": " << get_depths(i) << std::endl;
     }
 }
 
@@ -150,7 +150,7 @@ std::pair<int,int> TData::make_index(int from, int to)
 {
     std::pair<int,int> index{};
     index.first = from;
-    index.first = to;
+    index.second = to;
     return index;
 }
 

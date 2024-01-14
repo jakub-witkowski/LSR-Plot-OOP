@@ -19,7 +19,7 @@ int main(int argc, char** argv)
     dataset->load_input();
     // dataset->display_raw_data();
     // dataset->display_ages_vector();
-    // dataset->display_depths_vector();
+    dataset->display_depths_vector();
 
     /* Test if data is sorted */
     if (!dataset->test_input_order())

@@ -17,7 +17,7 @@ class TData;
 class TSegment
 {
 public:
-    TSegment(size_t, size_t);
+    TSegment(TData*, size_t, size_t);
     ~TSegment();
 
     void display_ages_vector();
@@ -26,8 +26,8 @@ public:
     void compute_lsr_values();
     void compute_polynomial_expression();
 
-    void copy_ages_to_segment(TData*, size_t, size_t);
-    void copy_depths_to_segment(TData*, size_t, size_t);
+    void copy_ages_to_segment(size_t, size_t);
+    void copy_depths_to_segment(size_t, size_t);
 
     /* setter function */
     void set_ages(double);
@@ -43,6 +43,7 @@ public:
 
 private:
     // TF1 f1;
+    TData* dset{nullptr};
     size_t index_from{};
     size_t index_to{};
 

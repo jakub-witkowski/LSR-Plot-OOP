@@ -27,11 +27,11 @@ int main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
-    // std::cout << "Number of segments from find_hiatus(): " << dataset->find_hiatus() + 1 << std::endl;
-    // std::cout << "Number of segments from segment_indexes.size(): " << dataset->get_segment_indexes_size() << std::endl;
-    // dataset->display_segment_indexes_vector();
+    std::cout << "Number of segments from find_hiatus(): " << dataset->find_hiatus() + 1 << std::endl;
+    std::cout << "Number of segments from segment_indexes.size(): " << dataset->get_segment_indexes_size() << std::endl;
+    dataset->display_segment_indexes_vector();
 
-    dataset->create_segments(segments);
+    dataset->create_segments(dataset, segments);
 
     std::cout << "Segments vector size: " << segments.size() << std::endl;
 

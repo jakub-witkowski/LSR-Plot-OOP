@@ -2,7 +2,7 @@
 #include "tdata.h"
 #include <iostream>
 
-TSegment::TSegment(size_t f, size_t t) : index_from(f), index_to(t)
+TSegment::TSegment(TData* ds, size_t f, size_t t) : dset(ds), index_from(f), index_to(t)
 {
     std::cout << "TSegment Constructor" << std::endl;
 }
@@ -36,19 +36,19 @@ void TSegment::compute_lsr_values()
 void TSegment::compute_polynomial_expression()
 {}
 
-void TSegment::copy_ages_to_segment(TData* d, size_t pos_from, size_t pos_to)
+void TSegment::copy_ages_to_segment(size_t pos_from, size_t pos_to)
 {
     for (int i = pos_from; i < pos_to; i ++)
     {
-        this->set_ages(d->get_ages(i));
+        this->set_ages(this->dset->get_ages(i));
     }
 }
 
-void TSegment::copy_depths_to_segment(TData* d, size_t pos_from, size_t pos_to)
+void TSegment::copy_depths_to_segment(size_t pos_from, size_t pos_to)
 {
     for (int i = pos_from; i < pos_to; i ++)
     {
-        this->set_depths(d->get_depths(i));
+        this->set_depths(this->dset->get_depths(i));
     }
 }
 

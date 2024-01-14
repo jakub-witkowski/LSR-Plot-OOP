@@ -162,18 +162,20 @@ std::pair<size_t,size_t> TData::make_index(int from, int to)
     return s;
 }*/
 
-void TData::create_segments(std::vector<TSegment> &s)
+void TData::create_segments(TData* ds, std::vector<TSegment> &s)
 {
     if (get_segment_indexes_size() == 1)
     {
-        s.push_back(TSegment(0,this->segment_indexes[0].second));
+        s.push_back(TSegment(ds, 0, this->segment_indexes[0].second));
         std::cout << s[0].get_index_from() << " | " << s[0].get_index_to() << std::endl;
+        // s[0].copy_ages_to_segment(ds, s[0].get_index_from, s[0].get_index_to);
+        // s[0].copy_depths_to_segment(ds, s[0].get_index_from, s[0].get_index_to);
     }
     else
     {
         for (int i = 0; i < get_segment_indexes_size(); i++)
         {
-            s.push_back(TSegment(this->segment_indexes[0].first,this->segment_indexes[0].second));
+            s.push_back(TSegment(ds, this->segment_indexes[0].first,this->segment_indexes[0].second));
             std::cout << s[i].get_index_from() << " | " << s[i].get_index_to() << std::endl;
         }
     }

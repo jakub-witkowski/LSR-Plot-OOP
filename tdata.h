@@ -25,8 +25,8 @@ public:
     bool is_depths_vector_sorted();
     bool test_input_order();
     int find_hiatus();
-    std::pair<int,int> make_index(int, int);
-//    TSegment create_segments(int, int);
+    std::pair<size_t,size_t> make_index(int, int);
+    TSegment create_segment(size_t, size_t);
 
 /* setter functions */
     void set_raw_data(std::string);

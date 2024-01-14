@@ -1,10 +1,9 @@
 #include "tdata.h"
 #include "tsegment.h"
-// #include "functions.h"
 #include <iostream>
 
-int number_of_segments{};
-std::vector<TSegment*> segments{}; 
+// int number_of_segments{};
+// std::vector<TSegment> segments{}; 
 
 int main(int argc, char** argv)
 {
@@ -19,7 +18,7 @@ int main(int argc, char** argv)
     dataset->load_input();
     // dataset->display_raw_data();
     // dataset->display_ages_vector();
-    dataset->display_depths_vector();
+    // dataset->display_depths_vector();
 
     /* Test if data is sorted */
     if (!dataset->test_input_order())
@@ -28,15 +27,9 @@ int main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
-    std::cout << "Number of segments from find_hiatus(): " << dataset->find_hiatus() + 1 << std::endl;
-    std::cout << "Number of segments from segment_indexes.size(): " << dataset->get_segment_indexes_size() << std::endl;
-
-    dataset->display_segment_indexes_vector();
-
-/*    for (int i = 0; i < number_of_segments; i++)
-    {
-        segments.push_back(new TSegment());
-    }*/
+    // std::cout << "Number of segments from find_hiatus(): " << dataset->find_hiatus() + 1 << std::endl;
+    // std::cout << "Number of segments from segment_indexes.size(): " << dataset->get_segment_indexes_size() << std::endl;
+    // dataset->display_segment_indexes_vector();
 
     dataset->~TData();
 

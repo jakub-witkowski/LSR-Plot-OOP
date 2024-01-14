@@ -1,5 +1,7 @@
 #include "tdata.h"
 
+// class TSegment;
+
 #include <fstream>
 #include <string>
 
@@ -146,18 +148,19 @@ int TData::find_hiatus()
     return number_of_hiatuses;
 }
 
-std::pair<int,int> TData::make_index(int from, int to)
+std::pair<size_t,size_t> TData::make_index(int from, int to)
 {
-    std::pair<int,int> index{};
+    std::pair<size_t,size_t> index{};
     index.first = from;
     index.second = to;
     return index;
 }
 
-/*TSegment TData::create_segments(int from, int to)
+TSegment TData::create_segment(size_t f, size_t t)
 {
-    return;
-}*/
+    TSegment s = TSegment(f, t);
+    return s;
+}
 
 /* getter functions */
 size_t TData::get_raw_data_size()

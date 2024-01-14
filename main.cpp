@@ -28,12 +28,15 @@ int main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
-    std::cout << "Number of segments: " << dataset->find_hiatus() + 1 << std::endl;
+    std::cout << "Number of segments from find_hiatus(): " << dataset->find_hiatus() + 1 << std::endl;
+    std::cout << "Number of segments from segment_indexes.size(): " << dataset->get_segment_indexes_size() << std::endl;
 
-    for (int i = 0; i < number_of_segments; i++)
+    dataset->display_segment_indexes_vector();
+
+/*    for (int i = 0; i < number_of_segments; i++)
     {
         segments.push_back(new TSegment());
-    }
+    }*/
 
     dataset->~TData();
 

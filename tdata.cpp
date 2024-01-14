@@ -61,6 +61,15 @@ void TData::display_depths_vector()
     }
 }
 
+void TData::display_segment_indexes_vector()
+{
+    std::cout << "Data in the segment_indexes vector:" << std::endl;
+    for (int i = 0; i < get_segment_indexes_size(); i++)
+    {
+        std::cout << "segment_indexes[" << i << "]: " << segment_indexes[i].first << " " << segment_indexes[i].second << std::endl;
+    }
+}
+
 bool TData::is_ages_vector_sorted()
 {
     bool result{true};
@@ -164,6 +173,11 @@ size_t TData::get_ages_vector_size()
 size_t TData::get_depths_vector_size()
 {
     return this->depths.size();
+}
+
+size_t TData::get_segment_indexes_size()
+{
+    return this->segment_indexes.size();
 }
 
 std::string TData::get_raw_data(int i)

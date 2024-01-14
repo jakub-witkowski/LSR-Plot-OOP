@@ -20,6 +20,9 @@ public:
     TSegment(size_t, size_t);
     ~TSegment();
 
+    void display_ages_vector();
+    void display_depths_vector();
+
     void compute_lsr_values();
     void compute_polynomial_expression();
 
@@ -31,8 +34,12 @@ public:
     void set_depths(double);
     
     /* getter functions */
-    double get_age(int);
-    double get_depth(int);
+    size_t get_index_from();
+    size_t get_index_to();
+    double get_ages(int);
+    double get_depths(int);
+    size_t get_ages_vector_size();
+    size_t get_depths_vector_size();
 
 private:
     // TF1 f1;

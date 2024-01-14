@@ -156,10 +156,27 @@ std::pair<size_t,size_t> TData::make_index(int from, int to)
     return index;
 }
 
-TSegment TData::create_segment(size_t f, size_t t)
+/*TSegment TData::create_segment(size_t f, size_t t)
 {
     TSegment s = TSegment(f, t);
     return s;
+}*/
+
+void TData::create_segments(std::vector<TSegment> &s)
+{
+    if (get_segment_indexes_size() == 1)
+    {
+        s.push_back(TSegment(0,this->segment_indexes[0].second));
+        std::cout << s[0].get_index_from() << " | " << s[0].get_index_to() << std::endl;
+    }
+    else
+    {
+        for (int i = 0; i < get_segment_indexes_size(); i++)
+        {
+            s.push_back(TSegment(this->segment_indexes[0].first,this->segment_indexes[0].second));
+            std::cout << s[i].get_index_from() << " | " << s[i].get_index_to() << std::endl;
+        }
+    }
 }
 
 /* getter functions */

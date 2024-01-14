@@ -3,7 +3,7 @@
 #include <iostream>
 
 // int number_of_segments{};
-// std::vector<TSegment> segments{}; 
+std::vector<TSegment> segments{}; 
 
 int main(int argc, char** argv)
 {
@@ -30,6 +30,10 @@ int main(int argc, char** argv)
     // std::cout << "Number of segments from find_hiatus(): " << dataset->find_hiatus() + 1 << std::endl;
     // std::cout << "Number of segments from segment_indexes.size(): " << dataset->get_segment_indexes_size() << std::endl;
     // dataset->display_segment_indexes_vector();
+
+    dataset->create_segments(segments);
+
+    std::cout << "Segments vector size: " << segments.size() << std::endl;
 
     dataset->~TData();
 

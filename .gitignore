@@ -1,6 +1,9 @@
 # VS Code project folder
 .vscode/
 
+#log files
+*.log
+
 #abandoned file
 functions.h
 

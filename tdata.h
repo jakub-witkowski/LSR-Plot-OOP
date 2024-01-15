@@ -27,7 +27,7 @@ public:
     int find_hiatus();
     std::pair<size_t,size_t> make_index(int, int);
     // TSegment create_segment(size_t, size_t);
-    void create_segments(TData*, std::vector<TSegment>&);
+    // void create_segments(TData*, std::vector<TSegment>&);
 
 /* setter functions */
     void set_raw_data(std::string);
@@ -43,12 +43,13 @@ public:
     std::string get_raw_data(int);
     double get_ages(int);
     double get_depths(int);
+    std::pair<size_t,size_t> get_index(int);
 
 private:
     std::vector<std::string> raw_data{};
     std::vector<double> ages{};
     std::vector<double> depths{};
-    std::vector<std::pair<int,int>> segment_indexes{};
+    std::vector<std::pair<size_t,size_t>> segment_indexes{};
 
 };
 

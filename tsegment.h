@@ -26,14 +26,15 @@ public:
     void compute_lsr_values();
     void compute_polynomial_expression();
 
-    void copy_ages_to_segment(size_t, size_t);
-    void copy_depths_to_segment(size_t, size_t);
+    void copy_ages_to_segment();
+    void copy_depths_to_segment();
 
     /* setter function */
     void set_ages(double);
     void set_depths(double);
     
     /* getter functions */
+    TData* get_dataset_ptr();
     size_t get_index_from();
     size_t get_index_to();
     double get_ages(int);

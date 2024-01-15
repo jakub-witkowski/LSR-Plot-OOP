@@ -17,7 +17,7 @@ void TSegment::display_ages_vector()
     std::cout << "Data in the ages vector: " << std::endl;
     for (int i = 0; i < get_ages_vector_size(); i++)
     {
-        std::cout << get_ages(i) << std::endl;
+        std::cout << i << ": " << get_ages(i) << std::endl;
     }
 }
 
@@ -36,17 +36,17 @@ void TSegment::compute_lsr_values()
 void TSegment::compute_polynomial_expression()
 {}
 
-void TSegment::copy_ages_to_segment(size_t pos_from, size_t pos_to)
+void TSegment::copy_ages_to_segment()
 {
-    for (int i = pos_from; i < pos_to; i ++)
+    for (int i = this->index_from; i < this->index_to; i ++)
     {
         this->set_ages(this->dset->get_ages(i));
     }
 }
 
-void TSegment::copy_depths_to_segment(size_t pos_from, size_t pos_to)
+void TSegment::copy_depths_to_segment()
 {
-    for (int i = pos_from; i < pos_to; i ++)
+    for (int i = this->index_from; i < this->index_to; i ++)
     {
         this->set_depths(this->dset->get_depths(i));
     }
@@ -64,6 +64,11 @@ void TSegment::set_depths(double d)
 }
 
 /* getter functions */
+TData* TSegment::get_dataset_ptr()
+{
+    return this->dset;
+}
+
 size_t TSegment::get_index_from()
 {
     return this->index_from;

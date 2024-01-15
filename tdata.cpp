@@ -50,7 +50,7 @@ void TData::display_ages_vector()
     std::cout << "Data in the ages vector: " << std::endl;
     for (int i = 0; i < get_ages_vector_size(); i++)
     {
-        std::cout << get_ages(i) << std::endl;
+        std::cout << i << ": " << get_ages(i) << std::endl;
     }
 }
 

@@ -34,7 +34,7 @@ int main(int argc, char** argv)
     // std::cout << "Number of segments from find_hiatus(): " << dataset->find_hiatus() + 1 << std::endl;
     // std::cout << "Number of segments from segment_indexes.size(): " << dataset->get_segment_indexes_size() << std::endl;
 
-    std::cout << "Segments vector size: " << segments.size() << std::endl;
+    // std::cout << "Segments vector size: " << segments.size() << std::endl;
 
     for (int i = 0; i < dataset->get_segment_indexes_size(); i++)
     {
@@ -43,10 +43,10 @@ int main(int argc, char** argv)
         segments[i].copy_depths_to_segment();
     }
 
-    std::cout << "Segments vector size: " << segments.size() << std::endl;
+    // std::cout << "Segments vector size: " << segments.size() << std::endl;
 
-    segments[0].display_ages_vector();
-    segments[0].display_depths_vector();
+    // segments[0].display_ages_vector();
+    // segments[0].display_depths_vector();
 
     dataset->~TData();
 

@@ -1,6 +1,6 @@
 # LSR-Plot-OOP
 
-Na obecnym etapie pracy do kompilacji nie jest potrzebny framework ROOT.
+W kodzie są już zawarte instrukcje #include do plików nagłówkowych ROOT.
 
 Dołączone do repozytorium pliki csv pozwalają przetestować różne warianty ładowania danych wejściowych:
 1. zbiór danych w 1050.csv zawiera dwie luki, więc program próbuje utworzyć trzy obiekty klasy TSegment;

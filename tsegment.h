@@ -1,15 +1,12 @@
 #ifndef TSEGMENT_H
 #define TSEGMENT_H
 
-// #include "tdata.h"
-
 class TData;
 
 /* include ROOT classes */
-/* #include "TF1.h"
-
-#include "TGraph.h"
-#include "TMultiGraph.h"*/
+#include "TF1.h" // ROOT class for defining 1-dimensional functions
+#include "TGraph.h" // ROOT class enabling the creation of plots with X and Y axes and a set of points
+// #include "TMultiGraph.h" // A TMultiGraph allows to manipulate a set of graphs as a single entity (from ROOT documentation)
 
 #include <vector>
 #include <stdio.h>
@@ -29,7 +26,7 @@ public:
     void copy_ages_to_segment();
     void copy_depths_to_segment();
 
-    /* setter function */
+    /* setter functions */
     void set_ages(double);
     void set_depths(double);
     
@@ -43,13 +40,16 @@ public:
     size_t get_depths_vector_size();
 
 private:
-    // TF1 f1;
     TData* dset{nullptr};
     size_t index_from{};
     size_t index_to{};
 
     std::vector<double> ages{};
     std::vector<double> depths{};
+
+    TF1* f1{nullptr}; //= new TF1("f1", "pol 4");
+    TGraph* g1{nullptr}; //= new TGraph(this->ages.size(), &this->ages[0], &this->depths[0]);
+    TGraph* g2{nullptr}; //= new TGraph();
 
     /*std::vector<double> lsr_values{};
     std::vector<double> lsr_values_plot{};

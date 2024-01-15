@@ -9,7 +9,7 @@ TSegment::TSegment(TData* ds, size_t f, size_t t) : dset(ds), index_from(f), ind
 
 TSegment::~TSegment()
 {
-    std::cout << "TSegment Destructor" << std::endl;
+    std::cout << " TSegment ~Destructor" << std::endl;
 }
 
 void TSegment::display_ages_vector()

@@ -26,25 +26,15 @@ int main(int argc, char** argv)
     dataset->load_input();
     dataset->find_hiatus();
 
-    // TSegment* seg = new TSegment(dataset, 0, 20);
-    // seg->copy_ages_to_segment();
-    // seg->copy_depths_to_segment();
-    
     // dataset->display_raw_data();
     // dataset->display_ages_vector();
     // dataset->display_depths_vector();
     // dataset->display_segment_indexes_vector();
 
-    // std::cout << "Dataset pointer: " << seg->get_dataset_ptr() << std::endl;
-    // seg->display_ages_vector();
-    // seg->display_depths_vector();
-
     // std::cout << "Number of segments from find_hiatus(): " << dataset->find_hiatus() + 1 << std::endl;
-    std::cout << "Number of segments from segment_indexes.size(): " << dataset->get_segment_indexes_size() << std::endl;
+    // std::cout << "Number of segments from segment_indexes.size(): " << dataset->get_segment_indexes_size() << std::endl;
 
     std::cout << "Segments vector size: " << segments.size() << std::endl;
-
-    // dataset->create_segments(dataset, segments);
 
     for (int i = 0; i < dataset->get_segment_indexes_size(); i++)
     {

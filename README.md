@@ -1,6 +1,6 @@
 # LSR-Plot-OOP
 
-W kodzie są już zawarte instrukcje #include do plików nagłówkowych ROOT.
+W kodzie są już zawarte instrukcje #include do plików nagłówkowych ROOT (https://root.cern/install/).
 
 Dołączone do repozytorium pliki csv pozwalają przetestować różne warianty ładowania danych wejściowych:
 1. zbiór danych w 1050.csv zawiera dwie luki, więc program próbuje utworzyć trzy obiekty klasy TSegment;

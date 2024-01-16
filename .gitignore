@@ -4,12 +4,11 @@
 #log files
 *.log
 
-#image files
-*.png
-
 #abandoned file
 functions.h
 
+#image files
+*.png
+
 #compiled binary file
 plot
-functions.h

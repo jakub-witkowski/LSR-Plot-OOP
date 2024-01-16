@@ -43,6 +43,19 @@ int main(int argc, char** argv)
         segments[i].copy_depths_to_segment();
     }
 
+    // for (int i = 0; i < segments.size(); i++)
+    // {
+    //     std::string fname = "segment" + std::to_string(i+1) + ".png";
+    //     segments[i].plot_to_png(fname);
+    // }
+
+    for (int i = 0; i < segments.size(); i++)
+    {
+        std::cout << "Segment " << i + 1 << ": " << std::endl;
+        segments[i].display_ages_vector();
+        segments[i].display_depths_vector();
+    }
+
     // std::cout << "Segments vector size: " << segments.size() << std::endl;
 
     // segments[0].display_ages_vector();

@@ -52,6 +52,14 @@ void TSegment::copy_depths_to_segment()
     }
 }
 
+void TSegment::plot_to_png(std::string f)
+{
+    this->g1->SetMarkerColor(4);
+    this->g1->SetMarkerSize(1.25);
+    this->g1->Draw("A RY P");
+    this->cnv->Print(f.c_str());
+}
+
 /* setter functions */
 void TSegment::set_ages(double a)
 {
@@ -62,6 +70,11 @@ void TSegment::set_depths(double d)
 {
     this->depths.push_back(d);
 }
+
+// void TSegment::set_g1_ptr();
+// {
+
+// }
 
 /* getter functions */
 TData* TSegment::get_dataset_ptr()

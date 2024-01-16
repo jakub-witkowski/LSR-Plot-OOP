@@ -4,6 +4,9 @@
 #log files
 *.log
 
+#image files
+*.png
+
 #abandoned file
 functions.h
 

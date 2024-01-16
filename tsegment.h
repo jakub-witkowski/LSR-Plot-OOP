@@ -32,7 +32,7 @@ public:
     /* setter functions */
     void set_ages(double);
     void set_depths(double);
-    // void set_g1_ptr();
+    void set_g1_ptr();
     
     /* getter functions */
     TData* get_dataset_ptr();
@@ -53,8 +53,8 @@ private:
 
     TF1* f1 {nullptr}; //= new TF1("f1", "pol 4");
     TCanvas* cnv = new TCanvas();
-    TGraph* g1 = new TGraph(this->ages.size(), &this->ages[0], &this->depths[0]);
-    TGraph* g2{nullptr}; //= new TGraph();
+    // TGraph* g1 = new TGraph(this->ages.size(), &this->ages[0], &this->depths[0]);
+    TGraph* g1{nullptr};
 
     /*std::vector<double> lsr_values{};
     std::vector<double> lsr_values_plot{};

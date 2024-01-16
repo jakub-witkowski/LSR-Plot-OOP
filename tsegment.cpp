@@ -71,10 +71,10 @@ void TSegment::set_depths(double d)
     this->depths.push_back(d);
 }
 
-// void TSegment::set_g1_ptr();
-// {
-
-// }
+void TSegment::set_g1_ptr()
+{
+    this->g1 = new TGraph(this->ages.size(), &this->ages[0], &this->depths[0]);
+}
 
 /* getter functions */
 TData* TSegment::get_dataset_ptr()

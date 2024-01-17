@@ -31,7 +31,20 @@ void TSegment::display_depths_vector()
 }
 
 void TSegment::compute_lsr_values()
-{}
+{
+    for (int i = 1; i < this->ages.size(); i++)
+    {
+        this->lsr_values.push_back(((this->depths[i] - this->depths[i-1]) * 100) / ((this->ages[i] - this->ages[i-1]) * 1000));
+    }
+
+    for (int i = 0; i < this->ages.size() - 1; i++)
+    {
+        this->lsr_plot_values.push_back(this->lsr_values[i]);
+        this->lsr_plot_values.push_back(this->lsr_values[i]);
+        this->lsr_plot_ages.push_back(this->ages[i]);
+        this->lsr_plot_ages.push_back(this->ages[i+1]);
+    }
+}
 
 void TSegment::compute_polynomial_expression()
 {}
@@ -54,9 +67,22 @@ void TSegment::copy_depths_to_segment()
 
 void TSegment::plot_to_png(std::string f)
 {
+    this->cnv->Divide(2,1);
+    this->cnv->cd(1);
+    this->g1->SetTitle("Age vs Depth, raw");
     this->g1->SetMarkerColor(4);
     this->g1->SetMarkerSize(1.25);
+    this->g1->SetMarkerStyle(20);
     this->g1->Draw("A RY P");
+    
+    this->cnv->cd(2);
+    this->g2->SetTitle("LSR variability, raw");
+    this->g2->SetLineColor(4);
+    this->g2->SetLineWidth(2);
+    this->g2->Draw("AL");
+
+    // this->cnv->Modified();
+    // this->cnv->Update();
     this->cnv->Print(f.c_str());
 }
 
@@ -74,6 +100,11 @@ void TSegment::set_depths(double d)
 void TSegment::set_g1_ptr()
 {
     this->g1 = new TGraph(this->ages.size(), &this->ages[0], &this->depths[0]);
+}
+
+void TSegment::set_g2_ptr()
+{
+    this->g2 = new TGraph(this->lsr_plot_ages.size(), &this->lsr_plot_ages[0], &this->lsr_plot_values[0]);
 }
 
 /* getter functions */

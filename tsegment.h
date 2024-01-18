@@ -4,7 +4,7 @@
 class TData;
 
 /* include ROOT classes */
-// #include "TF1.h" // ROOT class for defining 1-dimensional functions
+#include "TF1.h" // ROOT class for defining 1-dimensional functions
 #include "TGraph.h" // ROOT class enabling the creation of plots with X and Y axes and a set of points
 #include "TCanvas.h" // ROOT graphics class
 // #include "TMultiGraph.h" // A TMultiGraph allows to manipulate a set of graphs as a single entity (from ROOT documentation)
@@ -37,6 +37,7 @@ public:
     void set_depths(double);
     void set_g1_ptr();
     void set_g2_ptr();
+    void add_to_fit_vector(int);
     
     /* getter functions */
     TData* get_dataset_ptr();
@@ -65,6 +66,8 @@ private:
     TCanvas* cnv = new TCanvas();
     TGraph* g1{nullptr};
     TGraph* g2{nullptr};
+
+    std::vector<TPolynomial*> fit{};
 
     /*std::vector<double> smoothed_lsr_values{};
     std::vector<double> smoothed_lsr_values_plot{};*/

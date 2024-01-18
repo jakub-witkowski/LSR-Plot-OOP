@@ -2,7 +2,7 @@ CC=g++
 CXXFLAGS=-g
 CFLAGS=-std=c++11 `root-config --cflags`
 LDFLAGS=`root-config --libs`
-SOURCES=main.cpp tdata.cpp tsegment.cpp
+SOURCES=main.cpp tdata.cpp tpolynomial.cpp tsegment.cpp
 
 all: compile run
 

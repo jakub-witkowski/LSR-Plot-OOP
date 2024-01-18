@@ -2,12 +2,18 @@
 #define TPOLYNOMIAL_H
 
 #include "TF1.h"
+#include <string>
+#include <vector>
 
 class TPolynomial
 {
     public:
+    TPolynomial(int);
+
+    int deg{};
+    std::string phrase{};
     TF1* f{nullptr};
-    double par[10]{};
+    std::vector<double> parameters{};
     double chi2{};
     int ndf{};  
 };

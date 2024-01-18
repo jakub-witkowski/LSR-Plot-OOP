@@ -17,7 +17,7 @@ void TSegment::display_ages_vector()
     std::cout << "Data in the ages vector: " << std::endl;
     for (int i = 0; i < get_ages_vector_size(); i++)
     {
-        std::cout << i << ": " << get_ages(i) << std::endl;
+        std::cout << i << ": " << this->ages[i] << std::endl;
     }
 }
 
@@ -26,7 +26,7 @@ void TSegment::display_depths_vector()
     std::cout << "Data in the depths vector: " << std::endl;
     for (int i = 0; i < get_depths_vector_size(); i++)
     {
-        std::cout << i << ": " << get_depths(i) << std::endl;
+        std::cout << i << ": " << this->depths[i] << std::endl;
     }
 }
 
@@ -130,6 +130,11 @@ void TSegment::set_g1_ptr()
 void TSegment::set_g2_ptr()
 {
     this->g2 = new TGraph(this->lsr_plot_ages.size(), &this->lsr_plot_ages[0], &this->lsr_plot_values[0]);
+}
+
+void TSegment::add_to_fit_vector(int d)
+{
+    this->fit.push_back({new TPolynomial(d)});
 }
 
 /* getter functions */

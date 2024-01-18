@@ -30,6 +30,33 @@ void TSegment::display_depths_vector()
     }
 }
 
+void TSegment::display_lsr_values_vector()
+{
+    std::cout << "Data in the lsr_values vector: " << std::endl;
+    for (int i = 0; i < get_lsr_values_vector_size(); i++)
+    {
+        std::cout << i << ": " << this->lsr_values[i] << std::endl;
+    }
+}
+
+void TSegment::display_lsr_plot_values_vector()
+{
+    std::cout << "Data in the lsr_plot_values vector: " << std::endl;
+    for (int i = 0; i < get_lsr_plot_values_vector_size(); i++)
+    {
+        std::cout << i << ": " << this->lsr_plot_values[i] << std::endl;
+    }
+}
+
+void TSegment::display_lsr_plot_ages_vector()
+{
+    std::cout << "Data in the lsr_plot_ages vector: " << std::endl;
+    for (int i = 0; i < get_lsr_plot_ages_vector_size(); i++)
+    {
+        std::cout << i << ": " << this->lsr_plot_ages[i] << std::endl;
+    }
+}
+
 void TSegment::compute_lsr_values()
 {
     for (int i = 1; i < this->ages.size(); i++)
@@ -139,4 +166,19 @@ size_t TSegment::get_ages_vector_size()
 size_t TSegment::get_depths_vector_size()
 {
     return this->depths.size();
+}
+
+size_t TSegment::get_lsr_values_vector_size()
+{
+    return this->lsr_values.size();
+}
+
+size_t TSegment::get_lsr_plot_values_vector_size()
+{
+    return this->lsr_plot_values.size();
+}
+
+size_t TSegment::get_lsr_plot_ages_vector_size()
+{
+    return this->lsr_plot_ages.size();
 }

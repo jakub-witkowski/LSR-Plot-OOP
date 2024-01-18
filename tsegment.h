@@ -20,6 +20,9 @@ public:
 
     void display_ages_vector();
     void display_depths_vector();
+    void display_lsr_values_vector();
+    void display_lsr_plot_values_vector();
+    void display_lsr_plot_ages_vector();
 
     void compute_lsr_values();
     void compute_polynomial_expression();
@@ -43,6 +46,9 @@ public:
     double get_depths(int);
     size_t get_ages_vector_size();
     size_t get_depths_vector_size();
+    size_t get_lsr_values_vector_size();
+    size_t get_lsr_plot_values_vector_size();
+    size_t get_lsr_plot_ages_vector_size();
 
 private:
     TData* dset{nullptr}; // set by the constructor at initialisation
@@ -51,15 +57,15 @@ private:
 
     std::vector<double> ages{};
     std::vector<double> depths{};
+    std::vector<double> lsr_values{};
+    std::vector<double> lsr_plot_values{};
+    std::vector<double> lsr_plot_ages{};
 
 //    TF1* f1 {nullptr}; //= new TF1("f1", "pol 4");
     TCanvas* cnv = new TCanvas();
     TGraph* g1{nullptr};
     TGraph* g2{nullptr};
 
-    std::vector<double> lsr_values{};
-    std::vector<double> lsr_plot_values{};
-    std::vector<double> lsr_plot_ages{};
     /*std::vector<double> smoothed_lsr_values{};
     std::vector<double> smoothed_lsr_values_plot{};*/
 

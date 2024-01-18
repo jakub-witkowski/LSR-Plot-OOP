@@ -37,7 +37,10 @@ int main(int argc, char** argv)
     for (int i = 0; i < segments.size(); i++)
     {
         segments[i].set_g1_ptr();
+        segments[i].perform_fitting();
+        // segments[i].get_fit_line_for_plot(segments[i].find_best_fit());
         segments[i].set_g2_ptr();
+        segments[i].set_g3_ptr();
     }
 
     for (int i = 0; i < segments.size(); i++)
@@ -54,7 +57,7 @@ int main(int argc, char** argv)
         segments[i].plot_to_png(fname);
     }
 
-    dataset->~TData();
+    delete dataset;
 
     return 0;
 }

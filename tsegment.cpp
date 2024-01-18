@@ -73,9 +73,6 @@ void TSegment::compute_lsr_values()
     }
 }
 
-void TSegment::compute_polynomial_expression()
-{}
-
 void TSegment::copy_ages_to_segment()
 {
     for (int i = this->index_from; i < this->index_to; i ++)
@@ -89,6 +86,18 @@ void TSegment::copy_depths_to_segment()
     for (int i = this->index_from; i < this->index_to; i ++)
     {
         this->set_depths(this->dset->get_depths(i));
+    }
+}
+
+/* perform fitting */
+void TSegment::perform_fitting()
+{
+    for (int i = 0; i < this->fit.size(); i++)
+    {
+        this->g1->Fit(this->fit[i]->f, "N");
+        this->fit[i]->chi2 = this->fit[i]->f->GetChisquare();
+        this->fit[i]->ndf = this->fit[i]->f->GetNDF();
+        // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
     }
 }
 
@@ -118,19 +127,32 @@ int TSegment::find_best_fit()
         // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
     }
 
+    for (int i = 0; i <= best_fit_index; i++)
+    {
+        this->fit[best_fit_index]->parameters.push_back(this->fit[best_fit_index]->f->GetParameter(i));
+    }
+
     // std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
     return best_fit_index;
 }
 
-/* perform fitting */
-void TSegment::perform_fitting()
+double TSegment::compute_polynomial_expression(int deg, double current_value)
 {
-    for (int i = 0; i < this->fit.size(); i++)
+    double temporary_result{};
+    double total = this->fit[deg]->parameters[0];
+    for (int i = 1; i <= deg; i++)
     {
-        this->g1->Fit(this->fit[i]->f, "N");
-        this->fit[i]->chi2 = this->fit[i]->f->GetChisquare();
-        this->fit[i]->ndf = this->fit[i]->f->GetNDF();
-        // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
+        temporary_result = this->fit[deg]->parameters[i] * pow(current_value, i);
+        total += temporary_result;
+    }
+    return total;
+}
+
+void TSegment::get_fit_line_for_plot(int deg)
+{
+    for (int i = 0; i < this->ages.size(); i++)
+    {
+        fit_line.push_back(compute_polynomial_expression(deg, ages[i]));
     }
 }
 
@@ -138,21 +160,35 @@ void TSegment::plot_to_png(std::string f)
 {
     this->cnv->Divide(2,1);
     this->cnv->cd(1);
+
     this->g1->SetTitle("Age vs Depth, raw");
     this->g1->SetMarkerColor(4);
     this->g1->SetMarkerSize(1.25);
     this->g1->SetMarkerStyle(20);
     
-    perform_fitting();
+    // perform_fitting();
+    // get_fit_line_for_plot(find_best_fit());
 
-    this->g1->Fit(this->fit[find_best_fit()]->f, "L");
-    this->g1->Draw("A P");
+    // this->g2->SetTitle("Polynomial fit");
+    // this->g2->SetLineColor(2);
+    // this->g2->SetLineWidth(2);
+
+    this->multi->Add(g1, "p");
+    // this->multi->Add(g2, "l");
+    this->multi->SetName("AvD");
+    this->multi->SetTitle("Age vs depth plot with polynomial smoothing; Age (Ma);");
+    this->multi->GetXaxis()->CenterTitle();
+    this->multi->GetYaxis()->CenterTitle();
+    this->multi->Draw("A RY");
+
+    // this->g1->Fit(this->fit[find_best_fit()]->f, "L");
+    // this->g1->Draw("A P");
     
     this->cnv->cd(2);
-    this->g2->SetTitle("LSR variability, raw");
-    this->g2->SetLineColor(4);
-    this->g2->SetLineWidth(2);
-    this->g2->Draw("AL");
+    this->g3->SetTitle("LSR variability, raw");
+    this->g3->SetLineColor(4);
+    this->g3->SetLineWidth(2);
+    this->g3->Draw("AL");
 
     this->cnv->Print(f.c_str());
 }
@@ -175,12 +211,17 @@ void TSegment::set_g1_ptr()
 
 void TSegment::set_g2_ptr()
 {
-    this->g2 = new TGraph(this->lsr_plot_ages.size(), &this->lsr_plot_ages[0], &this->lsr_plot_values[0]);
+    this->g2 = new TGraph(this->ages.size(), &this->ages[0], &this->fit_line[0]);
+}
+
+void TSegment::set_g3_ptr()
+{
+    this->g3 = new TGraph(this->lsr_plot_ages.size(), &this->lsr_plot_ages[0], &this->lsr_plot_values[0]);
 }
 
 void TSegment::add_to_fit_vector(int d)
 {
-    this->fit.push_back({new TPolynomial(d)});
+    this->fit.push_back(new TPolynomial(d));
 }
 
 /* getter functions */

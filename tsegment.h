@@ -7,7 +7,8 @@ class TData;
 #include "TF1.h" // ROOT class for defining 1-dimensional functions
 #include "TGraph.h" // ROOT class enabling the creation of plots with X and Y axes and a set of points
 #include "TCanvas.h" // ROOT graphics class
-// #include "TMultiGraph.h" // A TMultiGraph allows to manipulate a set of graphs as a single entity (from ROOT documentation)
+#include "TMultiGraph.h" // A TMultiGraph allows to manipulate a set of graphs as a single entity (from ROOT documentation)
+#include "TAxis.h"
 
 #include <vector>
 #include "tpolynomial.h"
@@ -26,9 +27,8 @@ public:
     void compute_lsr_values();
     void perform_fitting();
     int find_best_fit();
-
-    void compute_polynomial_expression();
-
+    double compute_polynomial_expression(int, double);
+    void get_fit_line_for_plot(int);
     void copy_ages_to_segment();
     void copy_depths_to_segment();
 
@@ -39,6 +39,7 @@ public:
     void set_depths(double);
     void set_g1_ptr();
     void set_g2_ptr();
+    void set_g3_ptr();
     void add_to_fit_vector(int);
     
     /* getter functions */
@@ -63,11 +64,14 @@ private:
     std::vector<double> lsr_values{};
     std::vector<double> lsr_plot_values{};
     std::vector<double> lsr_plot_ages{};
+    std::vector<double> fit_line{};
 
 //    TF1* f1 {nullptr}; //= new TF1("f1", "pol 4");
     TCanvas* cnv = new TCanvas();
+    TMultiGraph* multi = new TMultiGraph();
     TGraph* g1{nullptr};
     TGraph* g2{nullptr};
+    TGraph* g3{nullptr};
 
     std::vector<TPolynomial*> fit{};
 

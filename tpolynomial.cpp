@@ -9,3 +9,8 @@ TPolynomial::TPolynomial(int d) : deg(d)
     f = new TF1("fit", phrase.c_str());
     std::cout << "TPolynomial Constructor" << std::endl;
 }
+
+TPolynomial::~TPolynomial()
+{
+    std::cout << " ~TPolynomial Destructor" << std::endl;
+}

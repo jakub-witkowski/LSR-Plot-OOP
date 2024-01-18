@@ -9,6 +9,7 @@ class TPolynomial
 {
     public:
     TPolynomial(int);
+    ~TPolynomial();
 
     int deg{};
     std::string phrase{};

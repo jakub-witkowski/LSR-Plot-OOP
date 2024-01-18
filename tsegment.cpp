@@ -100,7 +100,13 @@ void TSegment::plot_to_png(std::string f)
     this->g1->SetMarkerColor(4);
     this->g1->SetMarkerSize(1.25);
     this->g1->SetMarkerStyle(20);
-    this->g1->Draw("A RY P");
+    
+    for (int i = 0; i < this->fit.size(); i++)
+    {
+        this->g1->Fit(this->fit[i]->f, "N");
+    }
+
+    this->g1->Draw("A P");
     
     this->cnv->cd(2);
     this->g2->SetTitle("LSR variability, raw");

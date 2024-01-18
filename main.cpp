@@ -42,6 +42,14 @@ int main(int argc, char** argv)
 
     for (int i = 0; i < segments.size(); i++)
     {
+        for (int j = 0; j < 10; j++)
+        {
+            segments[i].add_to_fit_vector(j);
+        }
+    }
+        
+    for (int i = 0; i < segments.size(); i++)
+    {
         std::string fname = "segment" + std::to_string(i+1) + ".png";
         segments[i].plot_to_png(fname);
     }

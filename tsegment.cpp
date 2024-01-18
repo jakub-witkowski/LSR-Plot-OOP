@@ -81,8 +81,6 @@ void TSegment::plot_to_png(std::string f)
     this->g2->SetLineWidth(2);
     this->g2->Draw("AL");
 
-    // this->cnv->Modified();
-    // this->cnv->Update();
     this->cnv->Print(f.c_str());
 }
 

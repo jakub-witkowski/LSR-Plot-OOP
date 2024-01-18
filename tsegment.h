@@ -4,13 +4,13 @@
 class TData;
 
 /* include ROOT classes */
-#include "TF1.h" // ROOT class for defining 1-dimensional functions
+// #include "TF1.h" // ROOT class for defining 1-dimensional functions
 #include "TGraph.h" // ROOT class enabling the creation of plots with X and Y axes and a set of points
 #include "TCanvas.h" // ROOT graphics class
 // #include "TMultiGraph.h" // A TMultiGraph allows to manipulate a set of graphs as a single entity (from ROOT documentation)
 
 #include <vector>
-#include <stdio.h>
+#include "tpolynomial.h"
 
 class TSegment
 {
@@ -52,7 +52,7 @@ private:
     std::vector<double> ages{};
     std::vector<double> depths{};
 
-    TF1* f1 {nullptr}; //= new TF1("f1", "pol 4");
+//    TF1* f1 {nullptr}; //= new TF1("f1", "pol 4");
     TCanvas* cnv = new TCanvas();
     TGraph* g1{nullptr};
     TGraph* g2{nullptr};
@@ -61,11 +61,8 @@ private:
     std::vector<double> lsr_plot_values{};
     std::vector<double> lsr_plot_ages{};
     /*std::vector<double> smoothed_lsr_values{};
-    std::vector<double> smoothed_lsr_values_plot{};
+    std::vector<double> smoothed_lsr_values_plot{};*/
 
-    double par[10]{};
-    double chi2{};
-    int ndf{};*/
 };
 
 #endif // TSEGMENT_H

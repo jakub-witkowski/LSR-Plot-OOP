@@ -23,8 +23,10 @@ public:
     void display_lsr_values_vector();
     void display_lsr_plot_values_vector();
     void display_lsr_plot_ages_vector();
-
     void compute_lsr_values();
+    void perform_fitting();
+    int find_best_fit();
+
     void compute_polynomial_expression();
 
     void copy_ages_to_segment();

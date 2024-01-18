@@ -92,25 +92,9 @@ void TSegment::copy_depths_to_segment()
     }
 }
 
-void TSegment::plot_to_png(std::string f)
+/* find the best fit */
+int TSegment::find_best_fit()
 {
-    this->cnv->Divide(2,1);
-    this->cnv->cd(1);
-    this->g1->SetTitle("Age vs Depth, raw");
-    this->g1->SetMarkerColor(4);
-    this->g1->SetMarkerSize(1.25);
-    this->g1->SetMarkerStyle(20);
-    
-    /* perform fitting */
-    for (int i = 0; i < this->fit.size(); i++)
-    {
-        this->g1->Fit(this->fit[i]->f, "N");
-        this->fit[i]->chi2 = this->fit[i]->f->GetChisquare();
-        this->fit[i]->ndf = this->fit[i]->f->GetNDF();
-        std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
-    }
-
-    /* find best fit */
     int best_fit_index = -1;
     int current_index{};
 
@@ -131,14 +115,38 @@ void TSegment::plot_to_png(std::string f)
                     best_fit_index = current_index;
             }
         }
-        std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
+        // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
     }
 
-    std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
+    // std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
+    return best_fit_index;
+}
 
-    this->g1->Fit(this->fit[best_fit_index]->f, "L");
+/* perform fitting */
+void TSegment::perform_fitting()
+{
+    for (int i = 0; i < this->fit.size(); i++)
+    {
+        this->g1->Fit(this->fit[i]->f, "N");
+        this->fit[i]->chi2 = this->fit[i]->f->GetChisquare();
+        this->fit[i]->ndf = this->fit[i]->f->GetNDF();
+        // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
+    }
+}
+
+void TSegment::plot_to_png(std::string f)
+{
+    this->cnv->Divide(2,1);
+    this->cnv->cd(1);
+    this->g1->SetTitle("Age vs Depth, raw");
+    this->g1->SetMarkerColor(4);
+    this->g1->SetMarkerSize(1.25);
+    this->g1->SetMarkerStyle(20);
+    
+    perform_fitting();
+
+    this->g1->Fit(this->fit[find_best_fit()]->f, "L");
     this->g1->Draw("A P");
-    // this->fit[best_fit_index]->f->Draw();
     
     this->cnv->cd(2);
     this->g2->SetTitle("LSR variability, raw");

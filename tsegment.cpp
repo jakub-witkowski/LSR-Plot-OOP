@@ -101,12 +101,44 @@ void TSegment::plot_to_png(std::string f)
     this->g1->SetMarkerSize(1.25);
     this->g1->SetMarkerStyle(20);
     
+    /* perform fitting */
     for (int i = 0; i < this->fit.size(); i++)
     {
         this->g1->Fit(this->fit[i]->f, "N");
+        this->fit[i]->chi2 = this->fit[i]->f->GetChisquare();
+        this->fit[i]->ndf = this->fit[i]->f->GetNDF();
+        std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
     }
 
+    /* find best fit */
+    int best_fit_index = -1;
+    int current_index{};
+
+    for (int i = 0; i < this->fit.size() - 1; i++)
+    {
+        if(std::isnan(this->fit[i]->chi2 / this->fit[i]->ndf) == true)
+            continue;
+        if((this->fit[i]->chi2 == 0) || (this->fit[i]->ndf == 0))
+            continue;
+        if((this->fit[i]->chi2 / this->fit[i]->ndf) < (this->fit[i+1]->chi2 / this->fit[i+1]->ndf))
+        {   
+            if (best_fit_index == -1) 
+                best_fit_index = current_index = i;
+            else
+            {
+                current_index = i;
+                if ((this->fit[current_index]->chi2 / this->fit[current_index]->ndf) < (this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf))
+                    best_fit_index = current_index;
+            }
+        }
+        std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
+    }
+
+    std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
+
+    this->g1->Fit(this->fit[best_fit_index]->f, "L");
     this->g1->Draw("A P");
+    // this->fit[best_fit_index]->f->Draw();
     
     this->cnv->cd(2);
     this->g2->SetTitle("LSR variability, raw");

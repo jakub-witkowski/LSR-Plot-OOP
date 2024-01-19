@@ -110,7 +110,7 @@ int TSegment::find_best_fit()
     for (int i = 0; i < this->fit.size() - 1; i++)
     {
         if(std::isnan(this->fit[i]->chi2 / this->fit[i]->ndf) == true)
-            continue;
+           continue;
         if((this->fit[i]->chi2 == 0) || (this->fit[i]->ndf == 0))
             continue;
         if((this->fit[i]->chi2 / this->fit[i]->ndf) < (this->fit[i+1]->chi2 / this->fit[i+1]->ndf))
@@ -152,7 +152,7 @@ void TSegment::get_fit_line_for_plot(int deg)
 {
     for (int i = 0; i < this->ages.size(); i++)
     {
-        fit_line.push_back(compute_polynomial_expression(deg, ages[i]));
+        this->fit_line.push_back(compute_polynomial_expression(deg, this->ages[i]));
     }
 }
 
@@ -166,15 +166,16 @@ void TSegment::plot_to_png(std::string f)
     this->g1->SetMarkerSize(1.25);
     this->g1->SetMarkerStyle(20);
     
-    // perform_fitting();
-    // get_fit_line_for_plot(find_best_fit());
+    perform_fitting();
+    get_fit_line_for_plot(find_best_fit());
+    this->set_g2_ptr();
 
-    // this->g2->SetTitle("Polynomial fit");
-    // this->g2->SetLineColor(2);
-    // this->g2->SetLineWidth(2);
+    this->g2->SetTitle("Polynomial fit");
+    this->g2->SetLineColor(2);
+    this->g2->SetLineWidth(2);
 
     this->multi->Add(g1, "p");
-    // this->multi->Add(g2, "l");
+    this->multi->Add(g2, "l");
     this->multi->SetName("AvD");
     this->multi->SetTitle("Age vs depth plot with polynomial smoothing; Age (Ma);");
     this->multi->GetXaxis()->CenterTitle();

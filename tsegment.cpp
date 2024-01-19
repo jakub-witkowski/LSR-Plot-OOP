@@ -154,6 +154,28 @@ void TSegment::get_fit_line_for_plot(int deg)
     {
         this->fit_line.push_back(compute_polynomial_expression(deg, this->ages[i]));
     }
+
+    /* Create a TGraph object for plotting the fit line */
+    this->set_g2_ptr();
+}
+
+/* calculate smoothed LSR values */
+void TSegment::lsr_smoothing()
+{
+    for (int i = 1; i < this->ages.size(); i++)
+    {
+        this->smoothed_lsr_values.push_back(((this->fit_line[i] - this->fit_line[i-1])*100)/((this->ages[i] - this->ages[i-1])*1000));
+    }
+
+    /* establish LSR values and age tiepoints for plotting vector */
+    for (int i = 0; i < this->ages.size() - 1; i++)
+    {
+        this->smoothed_lsr_plot_values.push_back(this->smoothed_lsr_values[i]);
+        this->smoothed_lsr_plot_values.push_back(this->smoothed_lsr_values[i]);
+    }
+    
+    /* create a TGraph object for plotting the smoothed lsr values */
+    this->set_g4_ptr();
 }
 
 void TSegment::plot_to_png(std::string f)
@@ -168,28 +190,38 @@ void TSegment::plot_to_png(std::string f)
     
     perform_fitting();
     get_fit_line_for_plot(find_best_fit());
-    this->set_g2_ptr();
 
     this->g2->SetTitle("Polynomial fit");
     this->g2->SetLineColor(2);
     this->g2->SetLineWidth(2);
 
-    this->multi->Add(g1, "p");
-    this->multi->Add(g2, "l");
-    this->multi->SetName("AvD");
-    this->multi->SetTitle("Age vs depth plot with polynomial smoothing; Age (Ma);");
-    this->multi->GetXaxis()->CenterTitle();
-    this->multi->GetYaxis()->CenterTitle();
-    this->multi->Draw("A RY");
-
-    // this->g1->Fit(this->fit[find_best_fit()]->f, "L");
-    // this->g1->Draw("A P");
+    this->multi1->Add(g1, "p");
+    this->multi1->Add(g2, "l");
+    this->multi1->SetName("AvD");
+    this->multi1->SetTitle("Age vs depth plot with polynomial smoothing; Age (Ma);");
+    this->multi1->GetXaxis()->CenterTitle();
+    this->multi1->GetYaxis()->CenterTitle();
+    this->multi1->Draw("A RY");
     
     this->cnv->cd(2);
+
     this->g3->SetTitle("LSR variability, raw");
     this->g3->SetLineColor(4);
     this->g3->SetLineWidth(2);
-    this->g3->Draw("AL");
+
+    lsr_smoothing();
+
+    this->g4->SetTitle("LSR variability, smoothed");
+    this->g4->SetLineColor(2);
+    this->g4->SetLineWidth(2);
+
+    this->multi2->Add(g3, "l");
+    this->multi2->Add(g4, "l");
+    this->multi2->SetName("LSR");
+    this->multi2->SetTitle("Raw vs smoothed LSR plot; Age (Ma); Linear sedimentation rate (cm/kyr)");
+    this->multi2->GetXaxis()->CenterTitle();
+    this->multi2->GetYaxis()->CenterTitle();
+    this->multi2->Draw("A L");
 
     this->cnv->Print(f.c_str());
 }
@@ -218,6 +250,11 @@ void TSegment::set_g2_ptr()
 void TSegment::set_g3_ptr()
 {
     this->g3 = new TGraph(this->lsr_plot_ages.size(), &this->lsr_plot_ages[0], &this->lsr_plot_values[0]);
+}
+
+void TSegment::set_g4_ptr()
+{
+    this->g4 = new TGraph(this->lsr_plot_ages.size(), &this->lsr_plot_ages[0], &this->smoothed_lsr_plot_values[0]);
 }
 
 void TSegment::add_to_fit_vector(int d)

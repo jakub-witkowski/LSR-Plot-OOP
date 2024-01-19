@@ -31,7 +31,7 @@ public:
     void get_fit_line_for_plot(int);
     void copy_ages_to_segment();
     void copy_depths_to_segment();
-
+    void lsr_smoothing();
     void plot_to_png(std::string);
 
     /* setter functions */
@@ -40,6 +40,7 @@ public:
     void set_g1_ptr();
     void set_g2_ptr();
     void set_g3_ptr();
+    void set_g4_ptr();
     void add_to_fit_vector(int);
     
     /* getter functions */
@@ -65,19 +66,18 @@ private:
     std::vector<double> lsr_plot_values{};
     std::vector<double> lsr_plot_ages{};
     std::vector<double> fit_line{};
+    std::vector<double> smoothed_lsr_values{};
+    std::vector<double> smoothed_lsr_plot_values{};
 
-//    TF1* f1 {nullptr}; //= new TF1("f1", "pol 4");
     TCanvas* cnv = new TCanvas();
-    TMultiGraph* multi = new TMultiGraph();
+    TMultiGraph* multi1 = new TMultiGraph();
+    TMultiGraph* multi2 = new TMultiGraph();
     TGraph* g1{nullptr};
     TGraph* g2{nullptr};
     TGraph* g3{nullptr};
+    TGraph* g4{nullptr};
 
     std::vector<TPolynomial*> fit{};
-
-    /*std::vector<double> smoothed_lsr_values{};
-    std::vector<double> smoothed_lsr_values_plot{};*/
-
 };
 
 #endif // TSEGMENT_H

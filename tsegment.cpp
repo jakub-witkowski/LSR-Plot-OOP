@@ -97,7 +97,7 @@ void TSegment::perform_fitting()
         this->g1->Fit(this->fit[i]->f, "N");
         this->fit[i]->chi2 = this->fit[i]->f->GetChisquare();
         this->fit[i]->ndf = this->fit[i]->f->GetNDF();
-        // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
+        std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
     }
 }
 
@@ -107,13 +107,13 @@ int TSegment::find_best_fit()
     int best_fit_index = -1;
     int current_index{};
 
-    for (int i = 0; i < this->fit.size() - 1; i++)
+    for (int i = 1; i < this->fit.size() - 1; i++)
     {
         if(std::isnan(this->fit[i]->chi2 / this->fit[i]->ndf) == true)
            continue;
         if((this->fit[i]->chi2 == 0) || (this->fit[i]->ndf == 0))
             continue;
-        if((this->fit[i]->chi2 / this->fit[i]->ndf) < (this->fit[i+1]->chi2 / this->fit[i+1]->ndf))
+        if((this->fit[i]->chi2 / this->fit[i]->ndf) < (this->fit[i-1]->chi2 / this->fit[i-1]->ndf))
         {   
             if (best_fit_index == -1) 
                 best_fit_index = current_index = i;
@@ -124,7 +124,7 @@ int TSegment::find_best_fit()
                     best_fit_index = current_index;
             }
         }
-        // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
+        std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
     }
 
     for (int i = 0; i <= best_fit_index; i++)
@@ -132,7 +132,7 @@ int TSegment::find_best_fit()
         this->fit[best_fit_index]->parameters.push_back(this->fit[best_fit_index]->f->GetParameter(i));
     }
 
-    // std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
+    std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
     return best_fit_index;
 }
 

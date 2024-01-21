@@ -37,7 +37,7 @@ int main(int argc, char** argv)
     for (int i = 0; i < segments.size(); i++)
     {
         segments[i].set_g1_ptr();
-        segments[i].perform_fitting();
+        // segments[i].perform_fitting();
         // segments[i].find_best_fit();
         // segments[i].get_fit_line_for_plot(segments[i].find_best_fit());
         // segments[i].set_g2_ptr();

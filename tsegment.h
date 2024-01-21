@@ -27,6 +27,7 @@ public:
     void compute_lsr_values();
     void perform_fitting();
     int find_best_fit();
+    int find_the_best_fit();
     double compute_polynomial_expression(int, double);
     void get_fit_line_for_plot(int);
     void copy_ages_to_segment();

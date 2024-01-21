@@ -102,18 +102,57 @@ void TSegment::perform_fitting()
 }
 
 /* find the best fit */
+int TSegment::find_the_best_fit()
+{
+    std::vector<std::pair<double, int>> best_fit{};
+    std::pair<double, int> item{};
+
+    for (int i = 0; i < this->fit.size() - 1; i++)
+    {
+        if((this->fit[i]->chi2 == 0) || (this->fit[i]->ndf == 0))
+            continue;
+        if(std::isnan(this->fit[i]->chi2 / this->fit[i]->ndf) == true)
+            continue;
+        else
+        {
+            item.first = this->fit[i]->chi2 / this->fit[i]->ndf;
+            item.second = i;
+            best_fit.push_back(item);
+
+            std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
+        }
+    }
+
+    std::sort(best_fit.begin(), best_fit.end(),
+    [](std::pair<double,int> x, std::pair<double,int> y)
+    {
+        return x.first < y.first;
+    });
+
+    const int best_fit_index = best_fit[0].second;
+
+    for (int i = 0; i <= best_fit_index; i++)
+    {
+        this->fit[best_fit_index]->parameters.push_back(this->fit[best_fit_index]->f->GetParameter(i));
+    }
+
+    std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
+    return best_fit_index;
+}
+
+
 int TSegment::find_best_fit()
 {
     int best_fit_index = -1;
     int current_index{};
 
-    for (int i = 1; i < this->fit.size() - 1; i++)
+    for (int i = 0; i < this->fit.size() - 1; i++)
     {
         if(std::isnan(this->fit[i]->chi2 / this->fit[i]->ndf) == true)
            continue;
         if((this->fit[i]->chi2 == 0) || (this->fit[i]->ndf == 0))
             continue;
-        if((this->fit[i]->chi2 / this->fit[i]->ndf) < (this->fit[i-1]->chi2 / this->fit[i-1]->ndf))
+        if((this->fit[i+1]->chi2 / this->fit[i+1]->ndf) < (this->fit[i]->chi2 / this->fit[i]->ndf))
         {   
             if (best_fit_index == -1) 
                 best_fit_index = current_index = i;
@@ -189,7 +228,8 @@ void TSegment::plot_to_png(std::string f)
     this->g1->SetMarkerStyle(20);
     
     perform_fitting();
-    get_fit_line_for_plot(find_best_fit());
+    // get_fit_line_for_plot(find_best_fit());
+    get_fit_line_for_plot(find_the_best_fit());
 
     this->g2->SetTitle("Polynomial fit");
     this->g2->SetLineColor(2);

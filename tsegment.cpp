@@ -140,8 +140,7 @@ int TSegment::find_the_best_fit()
     return best_fit_index;
 }
 
-
-int TSegment::find_best_fit()
+/*int TSegment::find_best_fit()
 {
     int best_fit_index = -1;
     int current_index{};
@@ -173,7 +172,7 @@ int TSegment::find_best_fit()
 
     std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
     return best_fit_index;
-}
+}*/
 
 double TSegment::compute_polynomial_expression(int deg, double current_value)
 {
@@ -195,7 +194,7 @@ void TSegment::get_fit_line_for_plot(int deg)
     }
 
     /* Create a TGraph object for plotting the fit line */
-    this->set_g2_ptr();
+    // this->set_g2_ptr();
 }
 
 /* calculate smoothed LSR values */
@@ -214,7 +213,7 @@ void TSegment::lsr_smoothing()
     }
     
     /* create a TGraph object for plotting the smoothed lsr values */
-    this->set_g4_ptr();
+    // this->set_g4_ptr();
 }
 
 void TSegment::plot_to_png(std::string f)
@@ -227,9 +226,9 @@ void TSegment::plot_to_png(std::string f)
     this->g1->SetMarkerSize(1.25);
     this->g1->SetMarkerStyle(20);
     
-    perform_fitting();
+    // perform_fitting();
     // get_fit_line_for_plot(find_best_fit());
-    get_fit_line_for_plot(find_the_best_fit());
+    // get_fit_line_for_plot(find_the_best_fit());
 
     this->g2->SetTitle("Polynomial fit");
     this->g2->SetLineColor(2);
@@ -249,7 +248,7 @@ void TSegment::plot_to_png(std::string f)
     this->g3->SetLineColor(4);
     this->g3->SetLineWidth(2);
 
-    lsr_smoothing();
+    // lsr_smoothing();
 
     this->g4->SetTitle("LSR variability, smoothed");
     this->g4->SetLineColor(2);

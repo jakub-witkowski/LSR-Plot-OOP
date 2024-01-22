@@ -14,6 +14,7 @@ int main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
+    // std::unique_ptr<TData> dataset(new TData(argv[1]));
     TData * dataset = new TData(argv[1]);
 
     /* Test if data is sorted */
@@ -31,16 +32,8 @@ int main(int argc, char** argv)
         segments.push_back(TSegment(dataset, dataset->get_index(i).first, dataset->get_index(i).second));
         segments[i].copy_ages_to_segment();
         segments[i].copy_depths_to_segment();
-        segments[i].compute_lsr_values();
-    }
-
-    for (int i = 0; i < segments.size(); i++)
-    {
         segments[i].set_g1_ptr();
-        // segments[i].perform_fitting();
-        // segments[i].find_best_fit();
-        // segments[i].get_fit_line_for_plot(segments[i].find_best_fit());
-        // segments[i].set_g2_ptr();
+        segments[i].compute_lsr_values();
         segments[i].set_g3_ptr();
     }
 
@@ -50,6 +43,12 @@ int main(int argc, char** argv)
         {
             segments[i].add_to_fit_vector(j);
         }
+
+        segments[i].perform_fitting();
+        segments[i].get_fit_line_for_plot(segments[i].find_the_best_fit());
+        segments[i].set_g2_ptr();
+        segments[i].lsr_smoothing();
+        segments[i].set_g4_ptr();
     }
         
     for (int i = 0; i < segments.size(); i++)

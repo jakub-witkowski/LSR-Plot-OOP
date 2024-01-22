@@ -32,6 +32,8 @@ int main(int argc, char** argv)
         segments.push_back(TSegment(dataset, dataset->get_index(i).first, dataset->get_index(i).second));
         segments[i].copy_ages_to_segment();
         segments[i].copy_depths_to_segment();
+        // segments[i].display_ages_vector();
+        // segments[i].display_depths_vector();
         segments[i].set_g1_ptr();
         segments[i].compute_lsr_values();
         segments[i].set_g3_ptr();
@@ -49,7 +51,7 @@ int main(int argc, char** argv)
         segments[i].set_g2_ptr();
         segments[i].lsr_smoothing();
         segments[i].set_g4_ptr();
-        std::cout << "Segment " << i << ": Ages vector size: " << segments[i].get_ages_vector_size() << std::endl;
+        // std::cout << "Segment " << i << ": Ages vector size: " << segments[i].get_ages_vector_size() << std::endl;
     }
     
     std::unique_ptr<TPlot> plot(new TPlot());
@@ -57,13 +59,16 @@ int main(int argc, char** argv)
     for (int i = 0; i < segments.size(); i++)
     {
         plot->set_segm_ptr(&segments[i]);
+        // std::cout << "Segment " << i << ": Ages vector size: " << segments[i].get_ages_vector_size() << std::endl;
         plot->copy_ages_to_plot();
-        plot->display_ages_vector();
+        // plot->display_ages_vector();
     }
 
-    dataset->display_ages_vector();
+    // std::cout << "Plot - ages vector size: " << plot->get_ages_vector_size() << std::endl;
+    // std::cout << "Dataset - ages vector size: " << dataset->get_ages_vector_size() << std::endl;
+    // dataset->display_ages_vector();
 
-    /* determine the number of segments and plot the results 
+    /* determine the number of segments and plot the results */
     if (segments.size() == 1)
     {
         segments[0].plot_to_png("plot.png");
@@ -75,7 +80,7 @@ int main(int argc, char** argv)
             std::string fname = "segment" + std::to_string(i+1) + ".png";
             segments[i].plot_to_png(fname);
         }
-    }*/
+    }
 
     delete dataset;
 

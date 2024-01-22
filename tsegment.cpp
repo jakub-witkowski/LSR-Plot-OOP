@@ -83,7 +83,7 @@ void TSegment::compute_lsr_values()
 starting from position INDEX_FROM to position INDEX_TO */
 void TSegment::copy_ages_to_segment()
 {
-    for (int i = this->index_from; i < this->index_to; i ++)
+    for (int i = this->index_from; i <= this->index_to; i ++)
     {
         this->set_ages(this->dset->get_ages(i));
     }
@@ -94,7 +94,7 @@ starting from position INDEX_FROM to position INDEX_TO */
 
 void TSegment::copy_depths_to_segment()
 {
-    for (int i = this->index_from; i < this->index_to; i ++)
+    for (int i = this->index_from; i <= this->index_to; i ++)
     {
         this->set_depths(this->dset->get_depths(i));
     }

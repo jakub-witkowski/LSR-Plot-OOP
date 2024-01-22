@@ -61,6 +61,9 @@ int main(int argc, char** argv)
         plot->set_segm_ptr(&segments[i]);
         // std::cout << "Segment " << i << ": Ages vector size: " << segments[i].get_ages_vector_size() << std::endl;
         plot->copy_ages_to_plot();
+        plot->copy_depths_to_plot();
+        plot->copy_fit_line_to_plot();
+        plot->copy_lsr_plot_values_to_plot();
         // plot->display_ages_vector();
     }
 

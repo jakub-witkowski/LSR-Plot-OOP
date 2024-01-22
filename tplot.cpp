@@ -22,6 +22,40 @@ void TPlot::copy_ages_to_plot()
     }
 }
 
+void TPlot::copy_depths_to_plot()
+{
+    for (int i = 0; i < this->segm_ptr->get_depths_vector_size(); i++)
+    {
+        this->set_depths(this->segm_ptr->get_depths(i));
+    }
+}
+
+void TPlot::copy_fit_line_to_plot()
+{
+    for (int i = 0; i < this->segm_ptr->get_fit_line_vector_size(); i++)
+    {
+        this->set_fit_line(this->segm_ptr->get_fit_line(i));
+    }
+}
+
+void TPlot::copy_lsr_plot_values_to_plot()
+{
+    for (int i = 0; i < this->segm_ptr->get_lsr_plot_values_vector_size(); i++)
+    {
+        this->set_lsr_plot_values(this->segm_ptr->get_lsr_plot_value(i));
+    }
+}
+
+void TPlot::copy_smoothed_lsr_plot_values_to_plot()
+{
+
+}
+
+void TPlot::copy_lsr_plot_ages_to_plot()
+{
+    
+}
+
 /* displays data stored in the ages vector of a TSegment object */
 void TPlot::display_ages_vector()
 {
@@ -47,22 +81,22 @@ void TPlot::set_depths(double d)
     this->depths.push_back(d);
 }
 
-void set_fit_line(double)
+void TPlot::set_fit_line(double d)
+{
+    this->fit_line.push_back(d);
+}
+
+void TPlot::set_lsr_plot_values(double d)
 {
 
 }
 
-void set_lsr_plot_values(double)
+void TPlot::set_smoothed_lsr_plot_values(double d)
 {
 
 }
 
-void set_smoothed_lsr_plot_values(double)
-{
-
-}
-
-void set_lsr_plot_ages(double)
+void TPlot::set_lsr_plot_ages(double d)
 {
 
 }

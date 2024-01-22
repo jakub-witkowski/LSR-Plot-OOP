@@ -307,6 +307,21 @@ double TSegment::get_depths(int i)
     return this->depths[i];
 }
 
+double TSegment::get_fit_line(int i)
+{
+    return this->fit_line[i];
+}
+
+double TSegment::get_lsr_plot_value(int i)
+{
+    return this->lsr_plot_values[i];
+}
+
+size_t TSegment::get_fit_line_vector_size()
+{
+    return this->fit_line.size();
+}
+
 size_t TSegment::get_ages_vector_size()
 {
     return this->ages.size();

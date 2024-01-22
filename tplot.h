@@ -18,9 +18,14 @@ class TPlot
     ~TPlot();
 
     void copy_ages_to_plot();
+    void copy_depths_to_plot();
+    void copy_fit_line_to_plot();
+    void copy_lsr_plot_values_to_plot();
+    void copy_smoothed_lsr_plot_values_to_plot();
+    void copy_lsr_plot_ages_to_plot();
     void display_ages_vector();
     void plot_to_png();
-    
+
     void set_ages(double);
     void set_depths(double);
     void set_fit_line(double);

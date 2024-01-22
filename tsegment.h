@@ -4,7 +4,7 @@
 class TData;
 
 /* include ROOT classes */
-#include "TF1.h" // ROOT class for defining 1-dimensional functions
+// #include "TF1.h" // ROOT class for defining 1-dimensional functions
 #include "TGraph.h" // ROOT class enabling the creation of plots with X and Y axes and a set of points
 #include "TCanvas.h" // ROOT graphics class
 #include "TMultiGraph.h" // A TMultiGraph allows to manipulate a set of graphs as a single entity (from ROOT documentation)

@@ -15,7 +15,8 @@ Ogólna logika programu - pseudokod:
 5. Jeśli występuje n hiatusów, utwórz n+1 obiektów klasy TSegment i przekaż do nich dane z odpowiednich przedziałów głębokości i wieku.
 6. W każdym obiekcie klasy TSegment znajdź wielomian o najkorzystniejszym dopasowaniu (wyrażonym przez chi2/ndf) i zwróć jego parametry, chi2, liczbę stopni swobody (ndf).
 7. W każdym obiekcie klasy TSegment przelicz głębokości zgodnie ze znalezioną regresją wielomianową (wygładzanie zbioru danych).
-8. W każdym obiekcie klasy TSegment oblicz wahania tempa akumulacji osadu w funkcji czasu dla surowego oraz wygładzonego zbioru danych. Zwróć tabelę surowych oraz wygładzonych wartości tempa akumulacji osadu dla odcinków pomiędzy poszczególnymi punktami węzłowymi zbioru danych.
-9. Utwórz obiekt klasy TPlot przedstawiający wykres głębokości względem wieku (surowy i wygładzony zbiór danych) oraz wykres wahań tempa  akumulacji (surowy i wygładzony zbiór danych).
+8. W każdym obiekcie klasy TSegment oblicz wahania tempa akumulacji osadu w funkcji czasu dla surowego oraz wygładzonego zbioru danych.
+9. Zwróć tabelę surowych oraz wygładzonych wartości tempa akumulacji osadu dla odcinków pomiędzy poszczególnymi punktami węzłowymi zbioru danych.
+10. Utwórz obiekt klasy TPlot przedstawiający wykres głębokości względem wieku (surowy i wygładzony zbiór danych) oraz wykres wahań tempa  akumulacji (surowy i wygładzony zbiór danych).
 
 Przykład potencjalnego zastosowania z rzeczywistego projektu badawczego: https://cp.copernicus.org/articles/17/1937/2021/ (szczególnie suplement)

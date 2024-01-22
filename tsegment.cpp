@@ -12,6 +12,7 @@ TSegment::~TSegment()
     std::cout << " TSegment ~Destructor" << std::endl;
 }
 
+/* displays data stored in the ages vector of a TSegment object */
 void TSegment::display_ages_vector()
 {
     std::cout << "Data in the ages vector: " << std::endl;
@@ -21,6 +22,7 @@ void TSegment::display_ages_vector()
     }
 }
 
+/* displays data stored in the depths vector of a TSegment object */
 void TSegment::display_depths_vector()
 {
     std::cout << "Data in the depths vector: " << std::endl;
@@ -30,6 +32,7 @@ void TSegment::display_depths_vector()
     }
 }
 
+/* displays data stored in the lsr_values vector of a TSegment object */
 void TSegment::display_lsr_values_vector()
 {
     std::cout << "Data in the lsr_values vector: " << std::endl;
@@ -39,6 +42,7 @@ void TSegment::display_lsr_values_vector()
     }
 }
 
+/* displays data stored in the lsr_plot_values vector of a TSegment object */
 void TSegment::display_lsr_plot_values_vector()
 {
     std::cout << "Data in the lsr_plot_values vector: " << std::endl;
@@ -48,6 +52,7 @@ void TSegment::display_lsr_plot_values_vector()
     }
 }
 
+/* displays data stored in the lsr_plot_ages vector of a TSegment object */
 void TSegment::display_lsr_plot_ages_vector()
 {
     std::cout << "Data in the lsr_plot_ages vector: " << std::endl;
@@ -57,6 +62,7 @@ void TSegment::display_lsr_plot_ages_vector()
     }
 }
 
+/* calculates lsr values based on data from the ages vector and depths vector */
 void TSegment::compute_lsr_values()
 {
     for (int i = 1; i < this->ages.size(); i++)
@@ -73,6 +79,8 @@ void TSegment::compute_lsr_values()
     }
 }
 
+/* copies data that were originally loaded into the TDataset object (ages vector)
+starting from position INDEX_FROM to position INDEX_TO */
 void TSegment::copy_ages_to_segment()
 {
     for (int i = this->index_from; i < this->index_to; i ++)
@@ -80,6 +88,9 @@ void TSegment::copy_ages_to_segment()
         this->set_ages(this->dset->get_ages(i));
     }
 }
+
+/* copies data that were originally loaded into the TDataset object (depths vector)
+starting from position INDEX_FROM to position INDEX_TO */
 
 void TSegment::copy_depths_to_segment()
 {
@@ -89,7 +100,7 @@ void TSegment::copy_depths_to_segment()
     }
 }
 
-/* perform fitting */
+/* performs fitting */
 void TSegment::perform_fitting()
 {
     for (int i = 0; i < this->fit.size(); i++)
@@ -101,7 +112,7 @@ void TSegment::perform_fitting()
     }
 }
 
-/* find the best fit */
+/* finds the best fit by looking for the lowest chi2/ndf (number of degrees of freedom) ratio */
 int TSegment::find_the_best_fit()
 {
     std::vector<std::pair<double, int>> best_fit{};
@@ -119,7 +130,7 @@ int TSegment::find_the_best_fit()
             item.second = i;
             best_fit.push_back(item);
 
-            std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
+            // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
         }
     }
 
@@ -136,44 +147,11 @@ int TSegment::find_the_best_fit()
         this->fit[best_fit_index]->parameters.push_back(this->fit[best_fit_index]->f->GetParameter(i));
     }
 
-    std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
+    // std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
     return best_fit_index;
 }
 
-/*int TSegment::find_best_fit()
-{
-    int best_fit_index = -1;
-    int current_index{};
-
-    for (int i = 0; i < this->fit.size() - 1; i++)
-    {
-        if(std::isnan(this->fit[i]->chi2 / this->fit[i]->ndf) == true)
-           continue;
-        if((this->fit[i]->chi2 == 0) || (this->fit[i]->ndf == 0))
-            continue;
-        if((this->fit[i+1]->chi2 / this->fit[i+1]->ndf) < (this->fit[i]->chi2 / this->fit[i]->ndf))
-        {   
-            if (best_fit_index == -1) 
-                best_fit_index = current_index = i;
-            else
-            {
-                current_index = i;
-                if ((this->fit[current_index]->chi2 / this->fit[current_index]->ndf) < (this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf))
-                    best_fit_index = current_index;
-            }
-        }
-        std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
-    }
-
-    for (int i = 0; i <= best_fit_index; i++)
-    {
-        this->fit[best_fit_index]->parameters.push_back(this->fit[best_fit_index]->f->GetParameter(i));
-    }
-
-    std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
-    return best_fit_index;
-}*/
-
+/* calculates smoothed depth for a given age value using the best fit found for a segment */
 double TSegment::compute_polynomial_expression(int deg, double current_value)
 {
     double temporary_result{};
@@ -186,6 +164,7 @@ double TSegment::compute_polynomial_expression(int deg, double current_value)
     return total;
 }
 
+/* calculates values used for plotting the fit curve of reverse Y axis (no such option in ROOT) */
 void TSegment::get_fit_line_for_plot(int deg)
 {
     for (int i = 0; i < this->ages.size(); i++)
@@ -197,7 +176,7 @@ void TSegment::get_fit_line_for_plot(int deg)
     // this->set_g2_ptr();
 }
 
-/* calculate smoothed LSR values */
+/* calculates smoothed LSR values */
 void TSegment::lsr_smoothing()
 {
     for (int i = 1; i < this->ages.size(); i++)
@@ -216,6 +195,7 @@ void TSegment::lsr_smoothing()
     // this->set_g4_ptr();
 }
 
+/* plots data stored in a TSegment object */
 void TSegment::plot_to_png(std::string f)
 {
     this->cnv->Divide(2,1);

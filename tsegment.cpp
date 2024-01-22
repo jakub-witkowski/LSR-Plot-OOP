@@ -105,7 +105,7 @@ void TSegment::perform_fitting()
 {
     for (int i = 0; i < this->fit.size(); i++)
     {
-        this->g1->Fit(this->fit[i]->f, "N");
+        this->g1->Fit(this->fit[i]->f, "NQ");
         this->fit[i]->chi2 = this->fit[i]->f->GetChisquare();
         this->fit[i]->ndf = this->fit[i]->f->GetNDF();
         std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;

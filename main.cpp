@@ -1,5 +1,6 @@
 #include "tdata.h"
 #include "tsegment.h"
+#include "tplot.h"
 #include <iostream>
 #include <iomanip>
 
@@ -14,7 +15,6 @@ int main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
-    // std::unique_ptr<TData> dataset(new TData(argv[1]));
     TData * dataset = new TData(argv[1]);
 
     /* Test if data is sorted */
@@ -49,13 +49,33 @@ int main(int argc, char** argv)
         segments[i].set_g2_ptr();
         segments[i].lsr_smoothing();
         segments[i].set_g4_ptr();
+        std::cout << "Segment " << i << ": Ages vector size: " << segments[i].get_ages_vector_size() << std::endl;
     }
-        
-    // for (int i = 0; i < segments.size(); i++)
-    // {
-    //     std::string fname = "segment" + std::to_string(i+1) + ".png";
-    //     segments[i].plot_to_png(fname);
-    // }
+    
+    std::unique_ptr<TPlot> plot(new TPlot());
+
+    for (int i = 0; i < segments.size(); i++)
+    {
+        plot->set_segm_ptr(&segments[i]);
+        plot->copy_ages_to_plot();
+        plot->display_ages_vector();
+    }
+
+    dataset->display_ages_vector();
+
+    /* determine the number of segments and plot the results 
+    if (segments.size() == 1)
+    {
+        segments[0].plot_to_png("plot.png");
+    }
+    else if (segments.size() > 1)
+    {
+        for (int i = 0; i < segments.size(); i++)
+        {
+            std::string fname = "segment" + std::to_string(i+1) + ".png";
+            segments[i].plot_to_png(fname);
+        }
+    }*/
 
     delete dataset;
 

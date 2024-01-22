@@ -48,12 +48,18 @@ void TPlot::copy_lsr_plot_values_to_plot()
 
 void TPlot::copy_smoothed_lsr_plot_values_to_plot()
 {
-
+    for (int i = 0; i < this->segm_ptr->get_smoothed_lsr_plot_values_vector_size(); i++)
+    {
+        this->set_smoothed_lsr_plot_values(this->segm_ptr->get_smoothed_lsr_plot_value(i));
+    }
 }
 
 void TPlot::copy_lsr_plot_ages_to_plot()
 {
-    
+    for (int i = 0; i < this->segm_ptr->get_lsr_plot_ages_vector_size(); i++)
+    {
+        this->set_lsr_plot_ages(this->segm_ptr->get_lsr_plot_age(i));
+    }
 }
 
 /* displays data stored in the ages vector of a TSegment object */
@@ -66,9 +72,47 @@ void TPlot::display_ages_vector()
     }
 }
 
-void TPlot::plot_to_png()
+void TPlot::plot_to_png(std::string f)
 {
+    this->cnv->Divide(2,1);
+    this->cnv->cd(1);
 
+    this->g1->SetTitle("Age vs Depth, raw");
+    this->g1->SetMarkerColor(4);
+    this->g1->SetMarkerSize(1.25);
+    this->g1->SetMarkerStyle(20);
+    
+    this->g2->SetTitle("Polynomial fit");
+    this->g2->SetLineColor(2);
+    this->g2->SetLineWidth(2);
+
+    this->multi1->Add(g1, "p");
+    this->multi1->Add(g2, "l");
+    this->multi1->SetName("AvD");
+    this->multi1->SetTitle("Age vs depth plot with polynomial smoothing; Age (Ma);");
+    this->multi1->GetXaxis()->CenterTitle();
+    this->multi1->GetYaxis()->CenterTitle();
+    this->multi1->Draw("A RY");
+    
+    this->cnv->cd(2);
+
+    this->g3->SetTitle("LSR variability, raw");
+    this->g3->SetLineColor(4);
+    this->g3->SetLineWidth(2);
+
+    this->g4->SetTitle("LSR variability, smoothed");
+    this->g4->SetLineColor(2);
+    this->g4->SetLineWidth(2);
+
+    this->multi2->Add(g3, "l");
+    this->multi2->Add(g4, "l");
+    this->multi2->SetName("LSR");
+    this->multi2->SetTitle("Raw vs smoothed LSR plot; Age (Ma); Linear sedimentation rate (cm/kyr)");
+    this->multi2->GetXaxis()->CenterTitle();
+    this->multi2->GetYaxis()->CenterTitle();
+    this->multi2->Draw("A L");
+
+    this->cnv->Print(f.c_str());
 }
 
 void TPlot::set_ages(double a)
@@ -88,17 +132,17 @@ void TPlot::set_fit_line(double d)
 
 void TPlot::set_lsr_plot_values(double d)
 {
-
+    this->lsr_plot_values.push_back(d);
 }
 
 void TPlot::set_smoothed_lsr_plot_values(double d)
 {
-
+    this->smoothed_lsr_plot_values.push_back(d);
 }
 
 void TPlot::set_lsr_plot_ages(double d)
 {
-
+    this->lsr_plot_ages.push_back(d);
 }
 
 void TPlot::set_segm_ptr(TSegment* s)

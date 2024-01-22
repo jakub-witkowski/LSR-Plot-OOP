@@ -317,6 +317,16 @@ double TSegment::get_lsr_plot_value(int i)
     return this->lsr_plot_values[i];
 }
 
+double TSegment::get_smoothed_lsr_plot_value(int i)
+{
+    return this->smoothed_lsr_plot_values[i];
+}
+
+double TSegment::get_lsr_plot_age(int i)
+{
+    return this->lsr_plot_ages[i];
+}
+
 size_t TSegment::get_fit_line_vector_size()
 {
     return this->fit_line.size();
@@ -340,6 +350,11 @@ size_t TSegment::get_lsr_values_vector_size()
 size_t TSegment::get_lsr_plot_values_vector_size()
 {
     return this->lsr_plot_values.size();
+}
+
+size_t TSegment::get_smoothed_lsr_plot_values_vector_size()
+{
+    return this->smoothed_lsr_plot_values.size();
 }
 
 size_t TSegment::get_lsr_plot_ages_vector_size()

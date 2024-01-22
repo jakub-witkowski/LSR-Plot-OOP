@@ -52,11 +52,14 @@ public:
     double get_depths(int);
     double get_fit_line(int);
     double get_lsr_plot_value(int);
+    double get_smoothed_lsr_plot_value(int);
+    double get_lsr_plot_age(int);
     size_t get_ages_vector_size();
     size_t get_depths_vector_size();
     size_t get_fit_line_vector_size();
     size_t get_lsr_values_vector_size();
     size_t get_lsr_plot_values_vector_size();
+    size_t get_smoothed_lsr_plot_values_vector_size();
     size_t get_lsr_plot_ages_vector_size();
 
 private:

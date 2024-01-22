@@ -24,7 +24,7 @@ class TPlot
     void copy_smoothed_lsr_plot_values_to_plot();
     void copy_lsr_plot_ages_to_plot();
     void display_ages_vector();
-    void plot_to_png();
+    void plot_to_png(std::string);
 
     void set_ages(double);
     void set_depths(double);

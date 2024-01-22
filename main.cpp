@@ -62,8 +62,14 @@ int main(int argc, char** argv)
         // std::cout << "Segment " << i << ": Ages vector size: " << segments[i].get_ages_vector_size() << std::endl;
         plot->copy_ages_to_plot();
         plot->copy_depths_to_plot();
+        plot->set_g1_ptr();
         plot->copy_fit_line_to_plot();
+        plot->set_g2_ptr();
         plot->copy_lsr_plot_values_to_plot();
+        plot->copy_lsr_plot_ages_to_plot();
+        plot->set_g3_ptr();
+        plot->copy_smoothed_lsr_plot_values_to_plot();
+        plot->set_g4_ptr();
         // plot->display_ages_vector();
     }
 
@@ -78,11 +84,7 @@ int main(int argc, char** argv)
     }
     else if (segments.size() > 1)
     {
-        for (int i = 0; i < segments.size(); i++)
-        {
-            std::string fname = "segment" + std::to_string(i+1) + ".png";
-            segments[i].plot_to_png(fname);
-        }
+        plot->plot_to_png("plot.png");
     }
 
     delete dataset;

@@ -32,8 +32,6 @@ int main(int argc, char** argv)
         segments.push_back(TSegment(dataset, dataset->get_index(i).first, dataset->get_index(i).second));
         segments[i].copy_ages_to_segment();
         segments[i].copy_depths_to_segment();
-        // segments[i].display_ages_vector();
-        // segments[i].display_depths_vector();
         segments[i].set_g1_ptr();
         segments[i].compute_lsr_values();
         segments[i].set_g3_ptr();
@@ -51,7 +49,6 @@ int main(int argc, char** argv)
         segments[i].set_g2_ptr();
         segments[i].lsr_smoothing();
         segments[i].set_g4_ptr();
-        // std::cout << "Segment " << i << ": Ages vector size: " << segments[i].get_ages_vector_size() << std::endl;
     }
     
     std::unique_ptr<TPlot> plot(new TPlot());
@@ -59,23 +56,46 @@ int main(int argc, char** argv)
     for (int i = 0; i < segments.size(); i++)
     {
         plot->set_segm_ptr(&segments[i]);
-        // std::cout << "Segment " << i << ": Ages vector size: " << segments[i].get_ages_vector_size() << std::endl;
         plot->copy_ages_to_plot();
         plot->copy_depths_to_plot();
         plot->set_g1_ptr();
         plot->copy_fit_line_to_plot();
         plot->set_g2_ptr();
-        plot->copy_lsr_plot_values_to_plot();
-        plot->copy_lsr_plot_ages_to_plot();
-        plot->set_g3_ptr();
-        plot->copy_smoothed_lsr_plot_values_to_plot();
-        plot->set_g4_ptr();
-        // plot->display_ages_vector();
-    }
 
-    // std::cout << "Plot - ages vector size: " << plot->get_ages_vector_size() << std::endl;
-    // std::cout << "Dataset - ages vector size: " << dataset->get_ages_vector_size() << std::endl;
-    // dataset->display_ages_vector();
+        if (segments.size() > 1)
+            if ((i > 0) && (i <= segments.size() - 1))
+                plot->set_lsr_plot_values(0);
+
+        plot->copy_lsr_plot_values_to_plot();
+
+        if (segments.size() > 1)
+            if ((i >= 0) && (i < segments.size() - 1))
+                plot->set_lsr_plot_values(0);
+
+        if (segments.size() > 1)
+            if ((i > 0) && (i <= segments.size() - 1))
+                plot->set_lsr_plot_ages(segments[i].get_lsr_plot_age(0)); // repeat first element from the segment to be copied
+
+        plot->copy_lsr_plot_ages_to_plot();
+
+        if (segments.size() > 1)
+            if ((i >= 0) && (i < segments.size() - 1))
+                plot->set_lsr_plot_ages(plot->get_lsr_plot_age(plot->get_lsr_ages_vector_size() - 1));
+
+        plot->set_g3_ptr();
+
+        if (segments.size() > 1)
+            if ((i > 0) && (i <= segments.size() - 1))
+                plot->set_smoothed_lsr_plot_values(0);
+
+        plot->copy_smoothed_lsr_plot_values_to_plot();
+
+        if (segments.size() > 1)
+            if ((i >= 0) && (i < segments.size() - 1))
+                plot->set_smoothed_lsr_plot_values(0);
+
+        plot->set_g4_ptr();
+    }
 
     /* determine the number of segments and plot the results */
     if (segments.size() == 1)

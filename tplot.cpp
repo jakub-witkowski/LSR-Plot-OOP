@@ -175,3 +175,13 @@ size_t TPlot::get_ages_vector_size()
 {
     return this->ages.size();
 }
+
+size_t TPlot::get_lsr_ages_vector_size()
+{
+    return this->lsr_plot_ages.size();
+}
+
+double TPlot::get_lsr_plot_age(int i)
+{
+    return this->lsr_plot_ages[i];
+}

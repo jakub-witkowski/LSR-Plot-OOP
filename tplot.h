@@ -40,6 +40,8 @@ class TPlot
     void set_g4_ptr();
 
     size_t get_ages_vector_size();
+    size_t get_lsr_ages_vector_size();
+    double get_lsr_plot_age(int);
 
     private:
     std::vector<double> depths{};

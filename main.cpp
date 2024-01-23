@@ -6,6 +6,7 @@
 
 // int number_of_segments{};
 std::vector<TSegment> segments{}; 
+bool is_overfitted{false};
 
 int main(int argc, char** argv)
 {
@@ -46,6 +47,23 @@ int main(int argc, char** argv)
 
         segments[i].perform_fitting();
         segments[i].get_fit_line_for_plot(segments[i].find_the_best_fit());
+        
+        if (is_overfitted == true)
+        {
+            segments[i].clear_fit_line_vector();
+            segments[i].get_fit_line_for_plot(segments[i].find_the_best_fit(1));
+        }
+
+        /*is_overfitted = segments[i].test_for_overfitting();
+        while (is_overfitted == true)
+        {
+            int index{1};
+            segments[i].clear_fit_line_vector();
+            segments[i].get_fit_line_for_plot(segments[i].find_the_best_fit(index));
+            index++;
+            is_overfitted = segments[i].test_for_overfitting();
+        }*/
+
         segments[i].set_g2_ptr();
         segments[i].lsr_smoothing();
         segments[i].set_g4_ptr();
@@ -62,6 +80,7 @@ int main(int argc, char** argv)
         plot->copy_fit_line_to_plot();
         plot->set_g2_ptr();
 
+        /* modifications to the data vectors to reflect hiatuses between segments */
         if (segments.size() > 1)
             if ((i > 0) && (i <= segments.size() - 1))
                 plot->set_lsr_plot_values(0);

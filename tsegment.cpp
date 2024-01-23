@@ -112,6 +112,11 @@ void TSegment::perform_fitting()
     }
 }
 
+void TSegment::clear_fit_line_vector()
+{
+    this->fit_line.clear();
+}
+
 /* finds the best fit by looking for the lowest chi2/ndf (number of degrees of freedom) ratio */
 int TSegment::find_the_best_fit()
 {
@@ -149,6 +154,58 @@ int TSegment::find_the_best_fit()
 
     // std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
     return best_fit_index;
+}
+
+int TSegment::find_the_best_fit(int ind)
+{
+    std::vector<std::pair<double, int>> best_fit{};
+    std::pair<double, int> item{};
+
+    for (int i = 0; i < this->fit.size() - 1; i++)
+    {
+        if((this->fit[i]->chi2 == 0) || (this->fit[i]->ndf == 0))
+            continue;
+        if(std::isnan(this->fit[i]->chi2 / this->fit[i]->ndf) == true)
+            continue;
+        else
+        {
+            item.first = this->fit[i]->chi2 / this->fit[i]->ndf;
+            item.second = i;
+            best_fit.push_back(item);
+
+            // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
+        }
+    }
+
+    std::sort(best_fit.begin(), best_fit.end(),
+    [](std::pair<double,int> x, std::pair<double,int> y)
+    {
+        return x.first < y.first;
+    });
+
+    const int best_fit_index = best_fit[ind].second;
+
+    for (int i = 0; i <= best_fit_index; i++)
+    {
+        this->fit[best_fit_index]->parameters.push_back(this->fit[best_fit_index]->f->GetParameter(i));
+    }
+
+    // std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
+    return best_fit_index;
+}
+
+/* tests if the fit selected by find_the_best_fit() produces unrealistic values */
+bool TSegment::test_for_overfitting()
+{
+    bool result{false};
+
+    for (int i = 0; i < this->fit_line.size() - 1; i++)
+    {
+        if (fit_line[i+1] < fit_line[i])
+            result = true;
+    }
+
+    return result;
 }
 
 /* calculates smoothed depth for a given age value using the best fit found for a segment */

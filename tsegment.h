@@ -26,8 +26,10 @@ public:
     void display_lsr_plot_ages_vector();
     void compute_lsr_values();
     void perform_fitting();
-    int find_best_fit();
+    void clear_fit_line_vector();
     int find_the_best_fit();
+    int find_the_best_fit(int);
+    bool test_for_overfitting();
     double compute_polynomial_expression(int, double);
     void get_fit_line_for_plot(int);
     void copy_ages_to_segment();

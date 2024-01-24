@@ -27,7 +27,7 @@ public:
     void compute_lsr_values();
     void perform_fitting();
     void clear_fit_line_vector();
-    int find_the_best_fit();
+    // int find_the_best_fit();
     int find_the_best_fit(int);
     bool test_for_overfitting();
     double compute_polynomial_expression(int, double);

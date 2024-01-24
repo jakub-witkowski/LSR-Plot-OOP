@@ -118,7 +118,7 @@ void TSegment::clear_fit_line_vector()
 }
 
 /* finds the best fit by looking for the lowest chi2/ndf (number of degrees of freedom) ratio */
-int TSegment::find_the_best_fit()
+/*int TSegment::find_the_best_fit()
 {
     std::vector<std::pair<double, int>> best_fit{};
     std::pair<double, int> item{};
@@ -154,7 +154,7 @@ int TSegment::find_the_best_fit()
 
     // std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
     return best_fit_index;
-}
+} */
 
 int TSegment::find_the_best_fit(int ind)
 {

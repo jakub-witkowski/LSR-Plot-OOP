@@ -78,7 +78,7 @@ private:
     std::vector<double> smoothed_lsr_values{};
     std::vector<double> smoothed_lsr_plot_values{};
 
-    TCanvas* cnv = new TCanvas();
+    TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
     TMultiGraph* multi1 = new TMultiGraph();
     TMultiGraph* multi2 = new TMultiGraph();
     TGraph* g1{nullptr};

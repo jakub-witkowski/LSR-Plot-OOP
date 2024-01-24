@@ -52,7 +52,7 @@ class TPlot
     std::vector<double> lsr_plot_ages{};
 
     TSegment* segm_ptr{nullptr};
-    TCanvas* cnv = new TCanvas();
+    TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
     TMultiGraph* multi1 = new TMultiGraph();
     TMultiGraph* multi2 = new TMultiGraph();
     TGraph* g1{nullptr};

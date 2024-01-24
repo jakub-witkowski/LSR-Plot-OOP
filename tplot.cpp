@@ -72,6 +72,14 @@ void TPlot::display_ages_vector()
     }
 }
 
+void TPlot::delete_ptrs()
+{
+    delete this->g1;
+    delete this->g2;
+    delete this->g3;
+    delete this->g4;
+}
+
 void TPlot::plot_to_png(std::string f)
 {
     this->cnv->Divide(2,1);

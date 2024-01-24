@@ -12,5 +12,6 @@ TPolynomial::TPolynomial(int d) : deg(d)
 
 TPolynomial::~TPolynomial()
 {
+    delete f;
     std::cout << " ~TPolynomial Destructor" << std::endl;
 }

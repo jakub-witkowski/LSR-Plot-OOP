@@ -123,6 +123,12 @@ int main(int argc, char** argv)
         }
 
         plot->plot_to_png("plot.png");
+        plot->delete_ptrs();
+    }
+
+    for (int i = 0; i < segments.size(); i++)
+    {
+        segments[i].delete_ptrs();
     }
 
     delete dataset;

@@ -117,44 +117,16 @@ void TSegment::clear_fit_line_vector()
     this->fit_line.clear();
 }
 
-/* finds the best fit by looking for the lowest chi2/ndf (number of degrees of freedom) ratio */
-/*int TSegment::find_the_best_fit()
+void TSegment::delete_ptrs()
 {
-    std::vector<std::pair<double, int>> best_fit{};
-    std::pair<double, int> item{};
-
-    for (int i = 0; i < this->fit.size() - 1; i++)
-    {
-        if((this->fit[i]->chi2 == 0) || (this->fit[i]->ndf == 0))
-            continue;
-        if(std::isnan(this->fit[i]->chi2 / this->fit[i]->ndf) == true)
-            continue;
-        else
-        {
-            item.first = this->fit[i]->chi2 / this->fit[i]->ndf;
-            item.second = i;
-            best_fit.push_back(item);
-
-            // std::cout << i << ": Chi2/ndf = " << this->fit[i]->chi2 / this->fit[i]->ndf << std::endl;
-        }
-    }
-
-    std::sort(best_fit.begin(), best_fit.end(),
-    [](std::pair<double,int> x, std::pair<double,int> y)
-    {
-        return x.first < y.first;
-    });
-
-    const int best_fit_index = best_fit[0].second;
-
-    for (int i = 0; i <= best_fit_index; i++)
-    {
-        this->fit[best_fit_index]->parameters.push_back(this->fit[best_fit_index]->f->GetParameter(i));
-    }
-
-    // std::cout << "Best fit for this segment = " << this->fit[best_fit_index]->chi2 / this->fit[best_fit_index]->ndf << std::endl;
-    return best_fit_index;
-} */
+    // delete this->cnv;
+    // delete this->multi1;
+    // delete this->multi2;
+    delete this->g1;
+    delete this->g2;
+    delete this->g3;
+    delete this->g4;
+}
 
 int TSegment::find_the_best_fit(int ind)
 {

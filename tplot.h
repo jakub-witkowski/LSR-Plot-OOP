@@ -16,6 +16,7 @@ class TPlot
     public:
     TPlot();
     ~TPlot();
+    TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
 
     void copy_ages_to_plot();
     void copy_depths_to_plot();
@@ -25,6 +26,7 @@ class TPlot
     void copy_lsr_plot_ages_to_plot();
     void display_ages_vector();
     void delete_ptrs();
+    void plot();
     void plot_to_png(std::string);
 
     void set_ages(double);
@@ -53,7 +55,7 @@ class TPlot
     std::vector<double> lsr_plot_ages{};
 
     TSegment* segm_ptr{nullptr};
-    TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
+    // TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
     TMultiGraph* multi1 = new TMultiGraph();
     TMultiGraph* multi2 = new TMultiGraph();
     TGraph* g1{nullptr};

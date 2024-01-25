@@ -3,6 +3,10 @@
 #include "tplot.h"
 #include <iostream>
 
+/* include ROOT classes */
+#include "TRootCanvas.h"
+#include "TApplication.h"
+
 std::vector<TSegment> segments{}; // vector holding class TSegment objects
 bool is_overfitted{false}; // auxiliary variable used for testing whether the fit line is overfitted
 
@@ -75,6 +79,7 @@ int main(int argc, char** argv)
     }
     else if (segments.size() > 1)
     {
+        TApplication app("app", &argc, argv);
         std::unique_ptr<TPlot> plot(new TPlot());
 
         for (int i = 0; i < segments.size(); i++)
@@ -122,8 +127,12 @@ int main(int argc, char** argv)
             plot->set_g4_ptr();
         }
 
-        plot->plot_to_png("plot.png");
-        plot->delete_ptrs();
+        // plot->plot_to_png("plot.png");
+        // plot->delete_ptrs();
+        plot->plot();
+        TRootCanvas *rc = (TRootCanvas *)plot->cnv->GetCanvasImp();
+        rc->Connect("CloseWindow()", "TApplication", gApplication, "Terminate()");
+        app.Run();
     }
 
     for (int i = 0; i < segments.size(); i++)

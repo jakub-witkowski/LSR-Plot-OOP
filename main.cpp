@@ -1,7 +1,9 @@
+#include <iostream>
+
+/* include self-defined classes */
 #include "tdata.h"
 #include "tsegment.h"
 #include "tplot.h"
-#include <iostream>
 
 /* include ROOT classes */
 #include "TRootCanvas.h"
@@ -28,7 +30,10 @@ int main(int argc, char** argv)
         exit(EXIT_FAILURE);
     }
 
+    /* load data from file to ages and depths vector of the TData object */
     dataset->load_input();
+
+    /* determine how many gaps (hiatuses) are present in the dataset */
     dataset->find_hiatus();
 
     /* Depending on the number of hiatuses in the dataset (n), n+1 objects of class TSegment are created.

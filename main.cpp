@@ -76,15 +76,23 @@ int main(int argc, char** argv)
         segments[i].lsr_smoothing();
         segments[i].set_g4_ptr();
     }
-    
+
+    TApplication app("app", &argc, argv);
+    // std::unique_ptr<TPlot> plot = nullptr;
+
     /* determine the number of segments and plot the results */
     if (segments.size() == 1)
     {
-        segments[0].plot_to_png("plot.png");
+        std::unique_ptr<TPlot> plot(new TPlot(segments[0]));
+        plot->display_ages_vector();
+        plot->plot();
+        TRootCanvas *rc = (TRootCanvas *)plot->cnv->GetCanvasImp();
+        rc->Connect("CloseWindow()", "TApplication", gApplication, "Terminate()");
+        // segments[0].plot_to_png("plot.png");
     }
     else if (segments.size() > 1)
     {
-        TApplication app("app", &argc, argv);
+        // TApplication app("app", &argc, argv);
         std::unique_ptr<TPlot> plot(new TPlot());
 
         for (int i = 0; i < segments.size(); i++)
@@ -136,9 +144,10 @@ int main(int argc, char** argv)
         // plot->delete_ptrs();
         plot->plot();
         TRootCanvas *rc = (TRootCanvas *)plot->cnv->GetCanvasImp();
-        rc->Connect("CloseWindow()", "TApplication", gApplication, "Terminate()");
-        app.Run();
+        rc->Connect("CloseWindow()", "TApplication", gApplication, "Terminate()");   
     }
+
+    app.Run();
 
     for (int i = 0; i < segments.size(); i++)
     {

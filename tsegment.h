@@ -2,6 +2,7 @@
 #define TSEGMENT_H
 
 class TData;
+// class TPlot;
 
 /* include ROOT classes */
 // #include "TF1.h" // ROOT class for defining 1-dimensional functions
@@ -12,12 +13,15 @@ class TData;
 
 #include <vector>
 #include "tpolynomial.h"
+#include "tplot.h"
 
 class TSegment
 {
 public:
     TSegment(TData*, size_t, size_t);
     ~TSegment();
+
+    friend TPlot::TPlot(TSegment);
 
     void display_ages_vector();
     void display_depths_vector();

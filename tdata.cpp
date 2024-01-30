@@ -2,6 +2,7 @@
 
 #include <fstream>
 #include <string>
+#include <clocale>
 
 TData::TData(std::string f) : filename(f)
 {
@@ -23,13 +24,18 @@ void TData::load_input()
         set_raw_data(line);
     }
 
+    /* force using '.' as decimal separator */
+    const char* old_locale = std::setlocale(LC_NUMERIC, nullptr);
+    std::setlocale(LC_NUMERIC, "C");
+
     /* Separate data on coma, convert substring to double and copy to the respective depths or ages vector */
     for (int i = 0; i < raw_data.size(); i++)
     {
         size_t pos = raw_data[i].find(",");
-        set_depths(stod(raw_data[i].substr(0, pos)));
-        set_ages(stod(raw_data[i].substr(pos + 1)));
+        set_depths(std::stod(raw_data[i].substr(0, pos)));
+        set_ages(std::stod(raw_data[i].substr(pos + 1)));
     }
+    std::setlocale(LC_NUMERIC, old_locale);
 }
 
 void TData::display_raw_data()

@@ -2,26 +2,23 @@
 #define TSEGMENT_H
 
 class TData;
-// class TPlot;
 
 /* include ROOT classes */
 // #include "TF1.h" // ROOT class for defining 1-dimensional functions
 #include "TGraph.h" // ROOT class enabling the creation of plots with X and Y axes and a set of points
+//include "/snap/root-framework/928/usr/local/include/TGraph.h"
 #include "TCanvas.h" // ROOT graphics class
 #include "TMultiGraph.h" // A TMultiGraph allows to manipulate a set of graphs as a single entity (from ROOT documentation)
 #include "TAxis.h"
 
 #include <vector>
 #include "tpolynomial.h"
-#include "tplot.h"
 
 class TSegment
 {
 public:
     TSegment(TData*, size_t, size_t);
     ~TSegment();
-
-    friend TPlot::TPlot(TSegment);
 
     void display_ages_vector();
     void display_depths_vector();
@@ -67,6 +64,8 @@ public:
     size_t get_lsr_plot_values_vector_size();
     size_t get_smoothed_lsr_plot_values_vector_size();
     size_t get_lsr_plot_ages_vector_size();
+    TGraph* get_g1_ptr();
+    TGraph* get_g3_ptr();
 
 private:
     TData* dset{nullptr}; // set by the constructor at initialisation

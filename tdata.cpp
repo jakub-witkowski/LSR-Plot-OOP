@@ -6,12 +6,12 @@
 
 TData::TData(std::string f) : filename(f)
 {
-    std::cout << "TData Constructor" << std::endl;
+    // std::cout << "TData Constructor" << std::endl;
 }
 
 TData::~TData()
 {
-    std::cout << " TData ~Destructor" << std::endl;    
+    // std::cout << " TData ~Destructor" << std::endl;
 }
 
 /* reads the dataset from the file and stores it in the raw_data vector */
@@ -29,7 +29,7 @@ void TData::load_input()
     std::setlocale(LC_NUMERIC, "C");
 
     /* Separate data on coma, convert substring to double and copy to the respective depths or ages vector */
-    for (int i = 0; i < raw_data.size(); i++)
+    for (size_t i = 0; i < raw_data.size(); i++)
     {
         size_t pos = raw_data[i].find(",");
         set_depths(std::stod(raw_data[i].substr(0, pos)));
@@ -159,22 +159,22 @@ std::pair<size_t,size_t> TData::make_index(int from, int to)
 }
 
 /* getter functions */
-size_t TData::get_raw_data_size()
+int TData::get_raw_data_size()
 {
     return this->raw_data.size();
 }
 
-size_t TData::get_ages_vector_size()
+int TData::get_ages_vector_size()
 {
     return this->ages.size();
 }
 
-size_t TData::get_depths_vector_size()
+int TData::get_depths_vector_size()
 {
     return this->depths.size();
 }
 
-size_t TData::get_segment_indexes_size()
+int TData::get_segment_indexes_size()
 {
     return this->segment_indexes.size();
 }

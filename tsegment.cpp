@@ -316,12 +316,12 @@ TData* TSegment::get_dataset_ptr()
     return this->dset;
 }
 
-int TSegment::get_index_from()
+size_t TSegment::get_index_from()
 {
     return this->index_from;
 }
 
-int TSegment::get_index_to()
+size_t TSegment::get_index_to()
 {
     return this->index_to;
 }
@@ -356,37 +356,37 @@ double TSegment::get_lsr_plot_age(int i)
     return this->lsr_plot_ages[i];
 }
 
-int TSegment::get_fit_line_vector_size()
+size_t TSegment::get_fit_line_vector_size()
 {
     return this->fit_line.size();
 }
 
-int TSegment::get_ages_vector_size()
+size_t TSegment::get_ages_vector_size()
 {
     return this->ages.size();
 }
 
-int TSegment::get_depths_vector_size()
+size_t TSegment::get_depths_vector_size()
 {
     return this->depths.size();
 }
 
-int TSegment::get_lsr_values_vector_size()
+size_t TSegment::get_lsr_values_vector_size()
 {
     return this->lsr_values.size();
 }
 
-int TSegment::get_lsr_plot_values_vector_size()
+size_t TSegment::get_lsr_plot_values_vector_size()
 {
     return this->lsr_plot_values.size();
 }
 
-int TSegment::get_smoothed_lsr_plot_values_vector_size()
+size_t TSegment::get_smoothed_lsr_plot_values_vector_size()
 {
     return this->smoothed_lsr_plot_values.size();
 }
 
-int TSegment::get_lsr_plot_ages_vector_size()
+size_t TSegment::get_lsr_plot_ages_vector_size()
 {
     return this->lsr_plot_ages.size();
 }

@@ -38,7 +38,7 @@ int main(int argc, char** argv)
 
     /* Depending on the number of hiatuses in the dataset (n), n+1 objects of class TSegment are created.
     Data are copied to each segment, and linear sedimentation rates are calculated based on raw data */
-    for (int i = 0; i < dataset->get_segment_indexes_size(); i++)
+    for (size_t i = 0; i < dataset->get_segment_indexes_size(); i++)
     {
         segments.push_back(TSegment(dataset, dataset->get_index(i).first, dataset->get_index(i).second));
         segments[i].copy_ages_to_segment();
@@ -51,7 +51,7 @@ int main(int argc, char** argv)
     /* polynomial functions are created for each segment, the one displaying the best fit is selected 
     by finding the lowest chi2/ndf ratio; the selected fit line is then tested for overfitting; if it
     is found to be overfitted to the dataset, the next best fit is selected */
-    for (int i = 0; i < segments.size(); i++)
+    for (size_t i = 0; i < segments.size(); i++)
     {
         for (int j = 0; j < 10; j++)
         {
@@ -95,7 +95,7 @@ int main(int argc, char** argv)
         // TApplication app("app", &argc, argv);
         std::unique_ptr<TPlot> plot(new TPlot());
 
-        for (int i = 0; i < segments.size(); i++)
+        for (size_t i = 0; i < segments.size(); i++)
         {
             plot->set_segm_ptr(&segments[i]);
             plot->copy_ages_to_plot();
@@ -149,7 +149,7 @@ int main(int argc, char** argv)
 
     app.Run();
 
-    for (int i = 0; i < segments.size(); i++)
+    for (size_t i = 0; i < segments.size(); i++)
     {
         segments[i].delete_ptrs();
     }

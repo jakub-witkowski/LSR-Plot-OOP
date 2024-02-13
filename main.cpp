@@ -84,7 +84,7 @@ int main(int argc, char** argv)
     if (segments.size() == 1)
     {
         std::unique_ptr<TPlot> plot(new TPlot(segments[0]));
-        plot->display_ages_vector();
+        // plot->display_ages_vector();
         plot->plot();
         TRootCanvas *rc = (TRootCanvas *)plot->cnv->GetCanvasImp();
         rc->Connect("CloseWindow()", "TApplication", gApplication, "Terminate()");

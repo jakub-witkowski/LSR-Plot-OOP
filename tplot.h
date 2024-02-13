@@ -5,10 +5,14 @@ class TSegment;
 
 /* include ROOT classes */
 #include "TGraph.h" // ROOT class enabling the creation of plots with X and Y axes and a set of points
+//#include "/snap/root-framework/928/usr/local/include/TGraph.h"
 #include "TCanvas.h" // ROOT graphics class
 #include "TMultiGraph.h" // A TMultiGraph allows to manipulate a set of graphs as a single entity (from ROOT documentation)
 #include "TAxis.h"
+// #include "TPad.h"
+// #include "TAttPad.h"
 
+/* include STL header files */
 #include <vector>
 
 class TPlot
@@ -17,7 +21,7 @@ class TPlot
     TPlot();
     TPlot(TSegment);
     ~TPlot();
-    TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
+    TCanvas* cnv = new TCanvas("cnv", "LSR-Plot output", 0, 0, 1200, 800);
 
     void copy_ages_to_plot();
     void copy_depths_to_plot();
@@ -56,7 +60,6 @@ class TPlot
     std::vector<double> lsr_plot_ages{};
 
     TSegment* segm_ptr{nullptr};
-    // TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
     TMultiGraph* multi1 = new TMultiGraph();
     TMultiGraph* multi2 = new TMultiGraph();
     TGraph* g1{nullptr};

@@ -149,7 +149,6 @@ int main(int argc, char** argv)
     }
 
     delete dataset;
-    plot->delete_ptrs();
 
     return 0;
 }

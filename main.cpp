@@ -78,21 +78,17 @@ int main(int argc, char** argv)
     }
 
     TApplication app("app", &argc, argv);
-    // std::unique_ptr<TPlot> plot = nullptr;
 
     /* determine the number of segments and plot the results */
     if (segments.size() == 1)
     {
         std::unique_ptr<TPlot> plot(new TPlot(segments[0]));
-        // plot->display_ages_vector();
         plot->plot();
         TRootCanvas *rc = (TRootCanvas *)plot->cnv->GetCanvasImp();
         rc->Connect("CloseWindow()", "TApplication", gApplication, "Terminate()");
-        // segments[0].plot_to_png("plot.png");
     }
     else if (segments.size() > 1)
     {
-        // TApplication app("app", &argc, argv);
         std::unique_ptr<TPlot> plot(new TPlot());
 
         for (size_t i = 0; i < segments.size(); i++)
@@ -140,8 +136,6 @@ int main(int argc, char** argv)
             plot->set_g4_ptr();
         }
 
-        // plot->plot_to_png("plot.png");
-        // plot->delete_ptrs();
         plot->plot();
         TRootCanvas *rc = (TRootCanvas *)plot->cnv->GetCanvasImp();
         rc->Connect("CloseWindow()", "TApplication", gApplication, "Terminate()");   
@@ -155,6 +149,7 @@ int main(int argc, char** argv)
     }
 
     delete dataset;
+    plot->delete_ptrs();
 
     return 0;
 }

@@ -117,6 +117,11 @@ void TSegment::clear_fit_line_vector()
     this->fit_line.clear();
 }
 
+void TSegment::clear_pretty_fit_line_vector()
+{
+    this->pretty_fit_line.clear();
+}
+
 void TSegment::delete_ptrs()
 {
     // delete this->cnv;
@@ -203,6 +208,27 @@ void TSegment::get_fit_line_for_plot(int deg)
 
     /* Create a TGraph object for plotting the fit line */
     // this->set_g2_ptr();
+}
+
+void TSegment::get_pretty_fit_line_for_plot(int deg)
+{
+    this->ages_for_pretty_fit_line.push_back(this->ages[0]);
+    size_t index{1};
+    while (*(this->ages_for_pretty_fit_line.end() - 1) < (*(this->ages.end() - 1) - 0.5))
+    {
+        this->ages_for_pretty_fit_line.push_back(this->ages_for_pretty_fit_line[index - 1] + 0.5);
+        index++;
+    }
+
+    // for (int i = 1; i < limit; i++)
+    // {
+    //     this->ages_for_pretty_fit_line.push_back(this->ages_for_pretty_fit_line[i-1] + 0.5);
+    // }
+
+    for (size_t i = 0; i < this->ages_for_pretty_fit_line.size(); i++)
+    {
+        this->pretty_fit_line.push_back(compute_polynomial_expression(deg, this->ages_for_pretty_fit_line[i]));
+    }
 }
 
 /* calculates smoothed LSR values */
@@ -292,7 +318,7 @@ void TSegment::set_g1_ptr()
 
 void TSegment::set_g2_ptr()
 {
-    this->g2 = new TGraph(this->ages.size(), &this->ages[0], &this->fit_line[0]);
+    this->g2 = new TGraph(this->ages.size(), &this->ages_for_pretty_fit_line[0], &this->pretty_fit_line[0]);
 }
 
 void TSegment::set_g3_ptr()
@@ -356,6 +382,16 @@ double TSegment::get_lsr_plot_age(int i)
     return this->lsr_plot_ages[i];
 }
 
+double TSegment::get_pretty_fit_line(int i)
+{
+    return this->pretty_fit_line[i];
+}
+
+double TSegment::get_ages_for_pretty_fit_line(int i)
+{
+    return this->ages_for_pretty_fit_line[i];
+}
+
 size_t TSegment::get_fit_line_vector_size()
 {
     return this->fit_line.size();
@@ -389,6 +425,16 @@ size_t TSegment::get_smoothed_lsr_plot_values_vector_size()
 size_t TSegment::get_lsr_plot_ages_vector_size()
 {
     return this->lsr_plot_ages.size();
+}
+
+size_t TSegment::get_pretty_fit_line_vector_size()
+{
+    return this->pretty_fit_line.size();
+}
+
+size_t TSegment::get_ages_for_pretty_fit_line_vector_size()
+{
+    return this->ages_for_pretty_fit_line.size();
 }
 
 TGraph* TSegment::get_g1_ptr()

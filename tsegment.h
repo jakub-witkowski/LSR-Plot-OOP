@@ -28,11 +28,13 @@ public:
     void compute_lsr_values();
     void perform_fitting();
     void clear_fit_line_vector();
+    void clear_pretty_fit_line_vector();
     void delete_ptrs();
     int find_the_best_fit(int);
     bool test_for_overfitting();
     double compute_polynomial_expression(int, double);
     void get_fit_line_for_plot(int);
+    void get_pretty_fit_line_for_plot(int);
     void copy_ages_to_segment();
     void copy_depths_to_segment();
     void lsr_smoothing();
@@ -57,6 +59,8 @@ public:
     double get_lsr_plot_value(int);
     double get_smoothed_lsr_plot_value(int);
     double get_lsr_plot_age(int);
+    double get_pretty_fit_line(int);
+    double get_ages_for_pretty_fit_line(int);
     size_t get_ages_vector_size();
     size_t get_depths_vector_size();
     size_t get_fit_line_vector_size();
@@ -64,6 +68,8 @@ public:
     size_t get_lsr_plot_values_vector_size();
     size_t get_smoothed_lsr_plot_values_vector_size();
     size_t get_lsr_plot_ages_vector_size();
+    size_t get_pretty_fit_line_vector_size();
+    size_t get_ages_for_pretty_fit_line_vector_size();
     TGraph* get_g1_ptr();
     TGraph* get_g3_ptr();
 
@@ -78,6 +84,8 @@ private:
     std::vector<double> lsr_plot_values{};
     std::vector<double> lsr_plot_ages{};
     std::vector<double> fit_line{};
+    std::vector<double> pretty_fit_line{};
+    std::vector<double> ages_for_pretty_fit_line{};
     std::vector<double> smoothed_lsr_values{};
     std::vector<double> smoothed_lsr_plot_values{};
 

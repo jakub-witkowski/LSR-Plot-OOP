@@ -60,16 +60,17 @@ int main(int argc, char** argv)
 
         segments[i].perform_fitting();
         segments[i].get_fit_line_for_plot(segments[i].find_the_best_fit(0));
+        segments[i].get_pretty_fit_line_for_plot(segments[i].find_the_best_fit(0));
         
-        is_overfitted = segments[i].test_for_overfitting();
-        int index{1};
-        while (is_overfitted == true)
-        {
-            segments[i].clear_fit_line_vector();
-            segments[i].get_fit_line_for_plot(segments[i].find_the_best_fit(index));
-            index++;
-            is_overfitted = segments[i].test_for_overfitting();
-        }
+        // is_overfitted = segments[i].test_for_overfitting();
+        // int index{1};
+        // while (is_overfitted == true)
+        // {
+        //     segments[i].clear_fit_line_vector();
+        //     segments[i].get_fit_line_for_plot(segments[i].find_the_best_fit(index));
+        //     index++;
+        //     is_overfitted = segments[i].test_for_overfitting();
+        // }
 
         /* linear sedimentation rates are smoothed using the selected polynomial fit */
         segments[i].set_g2_ptr();
@@ -97,7 +98,9 @@ int main(int argc, char** argv)
             plot->copy_ages_to_plot();
             plot->copy_depths_to_plot();
             plot->set_g1_ptr();
-            plot->copy_fit_line_to_plot();
+            // plot->copy_fit_line_to_plot();
+            plot->copy_pretty_fit_line_to_plot();
+            plot->copy_ages_for_pretty_fit_line_to_plot();
             plot->set_g2_ptr();
 
             /* modifications to the data vectors to reflect hiatuses between segments */

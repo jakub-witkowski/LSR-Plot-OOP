@@ -22,6 +22,13 @@ TPlot::TPlot(TSegment s)
         smoothed_lsr_plot_values.push_back(s.get_smoothed_lsr_plot_value(i));
         lsr_plot_ages.push_back(s.get_lsr_plot_age(i));
     }
+
+    for (size_t i = 0; i < s.get_ages_for_pretty_fit_line_vector_size(); i++)
+    {
+        pretty_fit_line.push_back(s.get_pretty_fit_line(i));
+        ages_for_pretty_fit_line.push_back(s.get_ages_for_pretty_fit_line(i));
+    }
+
     set_g1_ptr();
     set_g2_ptr();
     set_g3_ptr();
@@ -55,6 +62,22 @@ void TPlot::copy_fit_line_to_plot()
     for (int i = 0; i < this->segm_ptr->get_fit_line_vector_size(); i++)
     {
         this->set_fit_line(this->segm_ptr->get_fit_line(i));
+    }
+}
+
+void TPlot::copy_pretty_fit_line_to_plot()
+{
+    for (size_t i = 0; i < this->segm_ptr->get_pretty_fit_line_vector_size(); i++)
+    {
+        this->set_pretty_fit_line(this->segm_ptr->get_pretty_fit_line(i));
+    }
+}
+
+void TPlot::copy_ages_for_pretty_fit_line_to_plot()
+{
+    for (size_t i = 0; i < this->segm_ptr->get_ages_for_pretty_fit_line_vector_size(); i++)
+    {
+        this->set_ages_for_pretty_fit_line(this->segm_ptr->get_ages_for_pretty_fit_line(i));
     }
 }
 
@@ -238,6 +261,16 @@ void TPlot::set_lsr_plot_ages(double d)
     this->lsr_plot_ages.push_back(d);
 }
 
+void TPlot::set_pretty_fit_line(double d)
+{
+    this->pretty_fit_line.push_back(d);
+}
+
+void TPlot::set_ages_for_pretty_fit_line(double d)
+{
+    this->ages_for_pretty_fit_line.push_back(d);
+}
+
 void TPlot::set_segm_ptr(TSegment* s)
 {
     this->segm_ptr = s;
@@ -250,7 +283,7 @@ void TPlot::set_g1_ptr()
 
 void TPlot::set_g2_ptr()
 {
-    this->g2 = new TGraph(this->ages.size(), &this->ages[0], &this->fit_line[0]);
+    this->g2 = new TGraph(this->ages_for_pretty_fit_line.size(), &this->ages_for_pretty_fit_line[0], &this->pretty_fit_line[0]);
 }
 
 void TPlot::set_g3_ptr()

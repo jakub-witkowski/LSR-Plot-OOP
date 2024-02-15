@@ -1,5 +1,5 @@
 CC=g++
-CXXFLAGS=-g -Wall
+CXXFLAGS=-g #-Wall
 CFLAGS=-std=c++11 `root-config --cflags`
 LDFLAGS=`root-config --libs`
 SOURCES=main.cpp tdata.cpp tpolynomial.cpp tsegment.cpp tplot.cpp

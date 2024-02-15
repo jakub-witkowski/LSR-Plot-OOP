@@ -30,6 +30,8 @@ class TPlot
     void copy_ages_to_plot();
     void copy_depths_to_plot();
     void copy_fit_line_to_plot();
+    void copy_pretty_fit_line_to_plot();
+    void copy_ages_for_pretty_fit_line_to_plot();
     void copy_lsr_plot_values_to_plot();
     void copy_smoothed_lsr_plot_values_to_plot();
     void copy_lsr_plot_ages_to_plot();
@@ -44,6 +46,8 @@ class TPlot
     void set_lsr_plot_values(double);
     void set_smoothed_lsr_plot_values(double);
     void set_lsr_plot_ages(double);
+    void set_pretty_fit_line(double);
+    void set_ages_for_pretty_fit_line(double);
 
     void set_segm_ptr(TSegment*);
     void set_g1_ptr();
@@ -59,6 +63,8 @@ class TPlot
     std::vector<double> depths{};
     std::vector<double> ages{};
     std::vector<double> fit_line{};
+    std::vector<double> pretty_fit_line{};
+    std::vector<double> ages_for_pretty_fit_line{};
     std::vector<double> lsr_plot_values{};
     std::vector<double> smoothed_lsr_plot_values{};
     std::vector<double> lsr_plot_ages{};

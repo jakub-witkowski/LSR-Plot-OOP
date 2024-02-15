@@ -219,11 +219,9 @@ void TSegment::get_pretty_fit_line_for_plot(int deg)
         this->ages_for_pretty_fit_line.push_back(this->ages_for_pretty_fit_line[index - 1] + 0.5);
         index++;
     }
-
-    // for (int i = 1; i < limit; i++)
-    // {
-    //     this->ages_for_pretty_fit_line.push_back(this->ages_for_pretty_fit_line[i-1] + 0.5);
-    // }
+    
+    if (*(this->ages_for_pretty_fit_line.end() - 1) < *(ages.end() - 1))
+        this->ages_for_pretty_fit_line.push_back(*(this->ages.end() - 1));
 
     for (size_t i = 0; i < this->ages_for_pretty_fit_line.size(); i++)
     {
@@ -318,7 +316,12 @@ void TSegment::set_g1_ptr()
 
 void TSegment::set_g2_ptr()
 {
-    this->g2 = new TGraph(this->ages.size(), &this->ages_for_pretty_fit_line[0], &this->pretty_fit_line[0]);
+    this->g2 = new TGraph(this->ages.size(), &this->ages[0], &this->fit_line[0]);
+}
+
+void TSegment::set_g2_ptr_pretty()
+{
+    this->g2 = new TGraph(this->ages_for_pretty_fit_line.size(), &this->ages_for_pretty_fit_line[0], &this->pretty_fit_line[0]);
 }
 
 void TSegment::set_g3_ptr()

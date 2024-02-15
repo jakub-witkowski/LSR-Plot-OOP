@@ -30,7 +30,7 @@ TPlot::TPlot(TSegment s)
     }
 
     set_g1_ptr();
-    set_g2_ptr();
+    set_g2_ptr_pretty();
     set_g3_ptr();
     set_g4_ptr();
     // std::cout << "TPlot Converting Constructor" << std::endl;
@@ -282,6 +282,11 @@ void TPlot::set_g1_ptr()
 }
 
 void TPlot::set_g2_ptr()
+{
+    this->g2 = new TGraph(this->ages.size(), &this->ages[0], &this->fit_line[0]);
+}
+
+void TPlot::set_g2_ptr_pretty()
 {
     this->g2 = new TGraph(this->ages_for_pretty_fit_line.size(), &this->ages_for_pretty_fit_line[0], &this->pretty_fit_line[0]);
 }

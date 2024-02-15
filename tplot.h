@@ -52,6 +52,7 @@ class TPlot
     void set_segm_ptr(TSegment*);
     void set_g1_ptr();
     void set_g2_ptr();
+    void set_g2_ptr_pretty();
     void set_g3_ptr();
     void set_g4_ptr();
 

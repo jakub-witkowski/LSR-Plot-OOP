@@ -45,6 +45,7 @@ public:
     void set_depths(double);
     void set_g1_ptr();
     void set_g2_ptr();
+    void set_g2_ptr_pretty();
     void set_g3_ptr();
     void set_g4_ptr();
     void add_to_fit_vector(int);

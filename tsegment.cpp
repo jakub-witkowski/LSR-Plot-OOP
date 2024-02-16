@@ -212,12 +212,15 @@ void TSegment::get_fit_line_for_plot(int deg)
 
 void TSegment::get_pretty_fit_line_for_plot(int deg)
 {
-    this->ages_for_pretty_fit_line.push_back(this->ages[0]);
-    size_t index{1};
-    while (*(this->ages_for_pretty_fit_line.end() - 1) < (*(this->ages.end() - 1) - 0.5))
+    if (this->ages_for_pretty_fit_line.size() == 0)
     {
-        this->ages_for_pretty_fit_line.push_back(this->ages_for_pretty_fit_line[index - 1] + 0.5);
-        index++;
+        this->ages_for_pretty_fit_line.push_back(this->ages[0]);
+        size_t index{1};
+        while (*(this->ages_for_pretty_fit_line.end() - 1) < (*(this->ages.end() - 1) - 0.5))
+        {
+            this->ages_for_pretty_fit_line.push_back(this->ages_for_pretty_fit_line[index - 1] + 0.5);
+            index++;
+        }
     }
     
     if (*(this->ages_for_pretty_fit_line.end() - 1) < *(ages.end() - 1))

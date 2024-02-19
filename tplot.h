@@ -21,8 +21,11 @@ class TPlot
 {
     public:
     TPlot();
+    TPlot(int);
     TPlot(TSegment);
     ~TPlot();
+
+    // int array_size;
     TCanvas* cnv = new TCanvas("cnv", "LSR-Plot output", 0, 0, 1200, 800);
     TLegend* leg_left = new TLegend(0.5,0.8,0.9,0.9);
     TLegend* leg_right = new TLegend(0.7,0.8,0.9,0.9);
@@ -77,6 +80,7 @@ class TPlot
     TGraph* g2{nullptr};
     TGraph* g3{nullptr};
     TGraph* g4{nullptr};
+    TGraph* graphs{nullptr};
 };
 
 #endif

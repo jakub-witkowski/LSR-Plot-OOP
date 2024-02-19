@@ -10,6 +10,11 @@ TPlot::TPlot()
     // std::cout << "TPlot Constructor" << std::endl;
 }
 
+TPlot::TPlot(int segments)
+{
+    graphs = new TGraph[segments];
+}
+
 /* converting constructor */
 TPlot::TPlot(TSegment s)
 {

@@ -176,9 +176,9 @@ bool TSegment::test_for_overfitting()
 {
     bool result{false};
 
-    for (size_t i = 0; i < this->fit_line.size() - 1; i++)
+    for (size_t i = 0; i < this->pretty_fit_line.size() - 1; i++)
     {
-        if (fit_line[i+1] < fit_line[i])
+        if (pretty_fit_line[i+1] < pretty_fit_line[i])
             result = true;
     }
 

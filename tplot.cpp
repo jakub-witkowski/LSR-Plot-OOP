@@ -18,6 +18,13 @@ TPlot::TPlot(TSegment s)
         depths.push_back(s.get_depths(i));
         ages.push_back(s.get_ages(i));
         fit_line.push_back(s.get_fit_line(i));
+        // lsr_plot_values.push_back(s.get_lsr_plot_value(i));
+        // smoothed_lsr_plot_values.push_back(s.get_smoothed_lsr_plot_value(i));
+        // lsr_plot_ages.push_back(s.get_lsr_plot_age(i));
+    }
+
+    for (size_t i = 0; i < s.get_lsr_plot_ages_vector_size(); i++)
+    {
         lsr_plot_values.push_back(s.get_lsr_plot_value(i));
         smoothed_lsr_plot_values.push_back(s.get_smoothed_lsr_plot_value(i));
         lsr_plot_ages.push_back(s.get_lsr_plot_age(i));

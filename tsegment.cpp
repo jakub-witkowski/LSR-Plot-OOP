@@ -324,14 +324,14 @@ void TSegment::set_g1_ptr()
     this->g1 = new TGraph(this->ages.size(), &this->ages[0], &this->depths[0]);
 }
 
-/*void TSegment::set_g2_ptr()
-{
-    this->g2 = new TGraph(this->ages.size(), &this->ages[0], &this->fit_line[0]);
-}
-
 void TSegment::set_g2_ptr_pretty()
 {
     this->g2 = new TGraph(this->ages_for_pretty_fit_line.size(), &this->ages_for_pretty_fit_line[0], &this->pretty_fit_line[0]);
+}
+
+/*void TSegment::set_g2_ptr()
+{
+    this->g2 = new TGraph(this->ages.size(), &this->ages[0], &this->fit_line[0]);
 }
 
 void TSegment::set_g3_ptr()
@@ -448,6 +448,11 @@ size_t TSegment::get_pretty_fit_line_vector_size()
 size_t TSegment::get_ages_for_pretty_fit_line_vector_size()
 {
     return this->ages_for_pretty_fit_line.size();
+}
+
+TGraph* TSegment::get_g2_pretty_ptr()
+{
+    return this->g2;
 }
 
 /*TGraph* TSegment::get_g1_ptr()

@@ -10,9 +10,12 @@ TPlot::TPlot()
     // std::cout << "TPlot Constructor" << std::endl;
 }
 
-TPlot::TPlot(int segments)
+TPlot::TPlot(int n, std::vector<TSegment> s) : graphs(new TGraph[n]), graphs_size(n)
 {
-    graphs = new TGraph[segments];
+    for (int i = 0; i < graphs_size; i++)
+    {
+        graphs[i] = *s[i].get_g2_pretty_ptr();
+    }
 }
 
 /* converting constructor */

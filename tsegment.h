@@ -2,6 +2,7 @@
 #define TSEGMENT_H
 
 class TData;
+// class TPlot;
 
 /* include ROOT classes */
 // #include "TF1.h" // ROOT class for defining 1-dimensional functions
@@ -13,12 +14,15 @@ class TData;
 
 #include <vector>
 #include "tpolynomial.h"
+// #include "tplot.h"
 
 class TSegment
 {
 public:
     TSegment(TData*, size_t, size_t);
     ~TSegment();
+
+    // friend TPlot::TPlot(TSegment, int, int);
 
     void display_ages_vector();
     void display_depths_vector();
@@ -44,6 +48,7 @@ public:
     void set_ages(double);
     void set_depths(double);
     void set_g1_ptr();
+    void set_g2_ptr_pretty();
     /*void set_g2_ptr();
     void set_g2_ptr_pretty();
     void set_g3_ptr();
@@ -72,6 +77,7 @@ public:
     size_t get_pretty_fit_line_vector_size();
     size_t get_ages_for_pretty_fit_line_vector_size();
     TGraph* get_g1_ptr();
+    TGraph* get_g2_pretty_ptr();
     TGraph* get_g3_ptr();
 
 private:
@@ -91,6 +97,7 @@ private:
     std::vector<double> smoothed_lsr_plot_values{};
 
     TGraph* g1{nullptr};
+    TGraph* g2{nullptr};
 
     /*TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
     TMultiGraph* multi1 = new TMultiGraph();

@@ -21,7 +21,7 @@ class TPlot
 {
     public:
     TPlot();
-    TPlot(int);
+    TPlot(int, std::vector<TSegment>);
     TPlot(TSegment);
     ~TPlot();
 
@@ -80,7 +80,9 @@ class TPlot
     TGraph* g2{nullptr};
     TGraph* g3{nullptr};
     TGraph* g4{nullptr};
-    TGraph* graphs{nullptr};
+    // TGraph graphs{nullptr};
+    TGraph* graphs = nullptr;
+    int graphs_size{};
 };
 
 #endif

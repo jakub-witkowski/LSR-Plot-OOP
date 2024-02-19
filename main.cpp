@@ -45,7 +45,7 @@ int main(int argc, char** argv)
         segments[i].copy_depths_to_segment();
         segments[i].set_g1_ptr();
         segments[i].compute_lsr_values();
-        segments[i].set_g3_ptr();
+        // segments[i].set_g3_ptr();
     }
 
     /* polynomial functions are created for each segment, the one displaying the best fit is selected 
@@ -75,9 +75,9 @@ int main(int argc, char** argv)
         }
 
         /* linear sedimentation rates are smoothed using the selected polynomial fit */
-        segments[i].set_g2_ptr_pretty();
+        // segments[i].set_g2_ptr_pretty();
         segments[i].lsr_smoothing();
-        segments[i].set_g4_ptr();
+        // segments[i].set_g4_ptr();
     }
 
     TApplication app("app", &argc, argv);
@@ -149,10 +149,10 @@ int main(int argc, char** argv)
 
     app.Run();
 
-    for (size_t i = 0; i < segments.size(); i++)
+    /*for (size_t i = 0; i < segments.size(); i++)
     {
         segments[i].delete_ptrs();
-    }
+    }*/
 
     delete dataset;
 

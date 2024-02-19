@@ -29,7 +29,7 @@ public:
     void perform_fitting();
     void clear_fit_line_vector();
     void clear_pretty_fit_line_vector();
-    void delete_ptrs();
+    // void delete_ptrs();
     int find_the_best_fit(int);
     bool test_for_overfitting();
     double compute_polynomial_expression(int, double);
@@ -38,16 +38,16 @@ public:
     void copy_ages_to_segment();
     void copy_depths_to_segment();
     void lsr_smoothing();
-    void plot_to_png(std::string);
+    // void plot_to_png(std::string);
 
     /* setter functions */
     void set_ages(double);
     void set_depths(double);
     void set_g1_ptr();
-    void set_g2_ptr();
+    /*void set_g2_ptr();
     void set_g2_ptr_pretty();
     void set_g3_ptr();
-    void set_g4_ptr();
+    void set_g4_ptr();*/
     void add_to_fit_vector(int);
     
     /* getter functions */
@@ -90,13 +90,15 @@ private:
     std::vector<double> smoothed_lsr_values{};
     std::vector<double> smoothed_lsr_plot_values{};
 
-    TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
+    TGraph* g1{nullptr};
+
+    /*TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
     TMultiGraph* multi1 = new TMultiGraph();
     TMultiGraph* multi2 = new TMultiGraph();
     TGraph* g1{nullptr};
     TGraph* g2{nullptr};
     TGraph* g3{nullptr};
-    TGraph* g4{nullptr};
+    TGraph* g4{nullptr};*/
 
     std::vector<TPolynomial*> fit{};
 };

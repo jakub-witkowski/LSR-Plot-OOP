@@ -122,7 +122,7 @@ void TSegment::clear_pretty_fit_line_vector()
     this->pretty_fit_line.clear();
 }
 
-void TSegment::delete_ptrs()
+/*void TSegment::delete_ptrs()
 {
     // delete this->cnv;
     // delete this->multi1;
@@ -131,7 +131,7 @@ void TSegment::delete_ptrs()
     delete this->g2;
     delete this->g3;
     delete this->g4;
-}
+}*/
 
 int TSegment::find_the_best_fit(int ind)
 {
@@ -259,7 +259,7 @@ void TSegment::lsr_smoothing()
 }
 
 /* plots data stored in a TSegment object */
-void TSegment::plot_to_png(std::string f)
+/*void TSegment::plot_to_png(std::string f)
 {
     this->cnv->Divide(2,1);
     this->cnv->cd(1);
@@ -306,7 +306,7 @@ void TSegment::plot_to_png(std::string f)
     this->multi2->Draw("A L");
 
     this->cnv->Print(f.c_str());
-}
+}*/
 
 /* setter functions */
 void TSegment::set_ages(double a)
@@ -324,7 +324,7 @@ void TSegment::set_g1_ptr()
     this->g1 = new TGraph(this->ages.size(), &this->ages[0], &this->depths[0]);
 }
 
-void TSegment::set_g2_ptr()
+/*void TSegment::set_g2_ptr()
 {
     this->g2 = new TGraph(this->ages.size(), &this->ages[0], &this->fit_line[0]);
 }
@@ -342,7 +342,7 @@ void TSegment::set_g3_ptr()
 void TSegment::set_g4_ptr()
 {
     this->g4 = new TGraph(this->lsr_plot_ages.size(), &this->lsr_plot_ages[0], &this->smoothed_lsr_plot_values[0]);
-}
+}*/
 
 void TSegment::add_to_fit_vector(int d)
 {
@@ -450,7 +450,7 @@ size_t TSegment::get_ages_for_pretty_fit_line_vector_size()
     return this->ages_for_pretty_fit_line.size();
 }
 
-TGraph* TSegment::get_g1_ptr()
+/*TGraph* TSegment::get_g1_ptr()
 {
     return this->g1;
 }
@@ -458,4 +458,4 @@ TGraph* TSegment::get_g1_ptr()
 TGraph* TSegment::get_g3_ptr()
 {
     return this->g3;
-}
+}*/

@@ -23,15 +23,15 @@ int main(int argc, char** argv)
     /* An object of class TData holds the input data from the file */
     TData * dataset = new TData(argv[1]);
 
+    /* load data from file to ages and depths vector of the TData object */
+    dataset->load_input();
+
     /* Test if data is sorted */
     if (!dataset->test_input_order())
     {
         std::cout << "The data is not properly sorted; inspect the file: " << dataset->filename << " and try again." << std::endl;
         exit(EXIT_FAILURE);
     }
-
-    /* load data from file to ages and depths vector of the TData object */
-    dataset->load_input();
 
     /* determine how many gaps (hiatuses) are present in the dataset */
     dataset->find_hiatus();

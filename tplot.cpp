@@ -204,28 +204,48 @@ void TPlot::plot()
     this->cnv->Update();
 }
 
-/*void TPlot::plot_to_png(std::string f)
+void TPlot::plot_from_array()
 {
     this->cnv->Divide(2,1);
-    this->cnv->cd(1);
+    // gStyle->SetTitleH(0.2);
+    gStyle->SetTitleSize(0.0375, "n");
 
+    this->cnv->cd(1)->SetLeftMargin(0.15);
+    this->cnv->cd(2)->SetLeftMargin(0.15);
+    // gStyle->SetTitleFont(0.2, "n");
+
+    this->cnv->cd(1);
     this->g1->SetTitle("Age vs Depth, raw");
     this->g1->SetMarkerColor(4);
     this->g1->SetMarkerSize(1.25);
     this->g1->SetMarkerStyle(20);
     
-    this->g2->SetTitle("Polynomial fit");
-    this->g2->SetLineColor(2);
-    this->g2->SetLineWidth(2);
+    for (int i = 0; i < graphs_size; i++)
+    {
+        std::string phrase = "Polynomial fit, segment " + std::to_string(i + 1);
+        this->graphs[i].SetTitle(phrase.c_str());
+        this->graphs[i].SetLineColor(2);
+        this->graphs[i].SetLineWidth(2);
+    }
 
     this->multi1->Add(g1, "p");
-    this->multi1->Add(g2, "l");
+
+    for (int i = 0; i < graphs_size; i++)
+    {
+        this->multi1->Add(&graphs[i], "l");
+    }
+    
     this->multi1->SetName("AvD");
-    this->multi1->SetTitle("Age vs depth plot with polynomial smoothing; Age (Ma);");
+    this->multi1->SetTitle("Age vs depth plot with polynomial smoothing; Age (million years); Depth (m below seafloor)");
     this->multi1->GetXaxis()->CenterTitle();
     this->multi1->GetYaxis()->CenterTitle();
+    this->multi1->GetYaxis()->SetTitleOffset(2.25);
     this->multi1->Draw("A RY");
     
+    leg_left->AddEntry(g1,"Age model tiepoints","p");
+    leg_left->AddEntry(&graphs[0],"Polynomial fit","l");
+    leg_left->Draw();
+
     this->cnv->cd(2);
 
     this->g3->SetTitle("LSR variability, raw");
@@ -239,13 +259,25 @@ void TPlot::plot()
     this->multi2->Add(g3, "l");
     this->multi2->Add(g4, "l");
     this->multi2->SetName("LSR");
-    this->multi2->SetTitle("Raw vs smoothed LSR plot; Age (Ma); Linear sedimentation rate (cm/kyr)");
+    this->multi2->SetTitle("Raw vs smoothed LSR plot; Age (million years); Linear sedimentation rate (cm/thousand years)");
     this->multi2->GetXaxis()->CenterTitle();
     this->multi2->GetYaxis()->CenterTitle();
+    this->multi2->GetYaxis()->SetTitleOffset(1.25);
     this->multi2->Draw("A L");
 
-    this->cnv->Print(f.c_str());
-}*/
+    /* modify the Y axis to avoid overlap with the legend box */
+    double max = *std::max_element(this->lsr_plot_values.begin(), this->lsr_plot_values.end());
+    this->cnv->cd(2)->Modified();
+    this->multi2->SetMinimum(0.);
+    this->multi2->SetMaximum((1.25 * max));
+
+    leg_right->AddEntry(g3,"age model","l");
+    leg_right->AddEntry(g4,"smoothed","l");
+    leg_right->Draw();
+
+    this->cnv->Modified();
+    this->cnv->Update();
+}
 
 void TPlot::set_ages(double a)
 {

@@ -75,7 +75,7 @@ int main(int argc, char** argv)
         }
 
         /* linear sedimentation rates are smoothed using the selected polynomial fit */
-        // segments[i].set_g2_ptr_pretty();
+        segments[i].set_g2_ptr_pretty();
         segments[i].lsr_smoothing();
         // segments[i].set_g4_ptr();
     }
@@ -92,7 +92,8 @@ int main(int argc, char** argv)
     }
     else if (segments.size() > 1)
     {
-        std::unique_ptr<TPlot> plot(new TPlot());
+        std::unique_ptr<TPlot> plot(new TPlot((int)segments.size(), segments));
+        // TPlot* plot = new TPlot((int)segments.size(), segments);
 
         for (size_t i = 0; i < segments.size(); i++)
         {
@@ -100,11 +101,11 @@ int main(int argc, char** argv)
             plot->copy_ages_to_plot();
             plot->copy_depths_to_plot();
             plot->set_g1_ptr();
-            plot->copy_fit_line_to_plot();
-            plot->copy_pretty_fit_line_to_plot();
-            plot->copy_ages_for_pretty_fit_line_to_plot();
+            // plot->copy_fit_line_to_plot();
+            // plot->copy_pretty_fit_line_to_plot();
+            // plot->copy_ages_for_pretty_fit_line_to_plot();
             // plot->set_g2_ptr();
-            plot->set_g2_ptr_pretty();
+            // plot->set_g2_ptr_pretty();
 
             /* modifications to the data vectors to reflect hiatuses between segments */
             if (segments.size() > 1)
@@ -142,7 +143,7 @@ int main(int argc, char** argv)
             plot->set_g4_ptr();
         }
 
-        plot->plot();
+        plot->plot_from_array();
         TRootCanvas *rc = (TRootCanvas *)plot->cnv->GetCanvasImp();
         rc->Connect("CloseWindow()", "TApplication", gApplication, "Terminate()");   
     }

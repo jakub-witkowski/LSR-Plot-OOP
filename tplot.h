@@ -41,6 +41,7 @@ class TPlot
     void display_ages_vector();
     void delete_ptrs();
     void plot();
+    void plot_from_array();
     // void plot_to_png(std::string);
 
     void set_ages(double);

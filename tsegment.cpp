@@ -205,9 +205,6 @@ void TSegment::get_fit_line_for_plot(int deg)
     {
         this->fit_line.push_back(compute_polynomial_expression(deg, this->ages[i]));
     }
-
-    /* Create a TGraph object for plotting the fit line */
-    // this->set_g2_ptr();
 }
 
 void TSegment::get_pretty_fit_line_for_plot(int deg)
@@ -253,60 +250,7 @@ void TSegment::lsr_smoothing()
         this->smoothed_lsr_plot_values.push_back(this->smoothed_lsr_values[i]);
         this->smoothed_lsr_plot_values.push_back(this->smoothed_lsr_values[i]);
     }
-    
-    /* create a TGraph object for plotting the smoothed lsr values */
-    // this->set_g4_ptr();
 }
-
-/* plots data stored in a TSegment object */
-/*void TSegment::plot_to_png(std::string f)
-{
-    this->cnv->Divide(2,1);
-    this->cnv->cd(1);
-
-    this->g1->SetTitle("Age vs Depth, raw");
-    this->g1->SetMarkerColor(4);
-    this->g1->SetMarkerSize(1.25);
-    this->g1->SetMarkerStyle(20);
-    
-    // perform_fitting();
-    // get_fit_line_for_plot(find_best_fit());
-    // get_fit_line_for_plot(find_the_best_fit());
-
-    this->g2->SetTitle("Polynomial fit");
-    this->g2->SetLineColor(2);
-    this->g2->SetLineWidth(2);
-
-    this->multi1->Add(g1, "p");
-    this->multi1->Add(g2, "l");
-    this->multi1->SetName("AvD");
-    this->multi1->SetTitle("Age vs depth plot with polynomial smoothing; Age (Ma);");
-    this->multi1->GetXaxis()->CenterTitle();
-    this->multi1->GetYaxis()->CenterTitle();
-    this->multi1->Draw("A RY");
-    
-    this->cnv->cd(2);
-
-    this->g3->SetTitle("LSR variability, raw");
-    this->g3->SetLineColor(4);
-    this->g3->SetLineWidth(2);
-
-    // lsr_smoothing();
-
-    this->g4->SetTitle("LSR variability, smoothed");
-    this->g4->SetLineColor(2);
-    this->g4->SetLineWidth(2);
-
-    this->multi2->Add(g3, "l");
-    this->multi2->Add(g4, "l");
-    this->multi2->SetName("LSR");
-    this->multi2->SetTitle("Raw vs smoothed LSR plot; Age (Ma); Linear sedimentation rate (cm/kyr)");
-    this->multi2->GetXaxis()->CenterTitle();
-    this->multi2->GetYaxis()->CenterTitle();
-    this->multi2->Draw("A L");
-
-    this->cnv->Print(f.c_str());
-}*/
 
 /* setter functions */
 void TSegment::set_ages(double a)

@@ -2,27 +2,21 @@
 #define TSEGMENT_H
 
 class TData;
-// class TPlot;
 
 /* include ROOT classes */
-// #include "TF1.h" // ROOT class for defining 1-dimensional functions
 #include "TGraph.h" // ROOT class enabling the creation of plots with X and Y axes and a set of points
-//include "/snap/root-framework/928/usr/local/include/TGraph.h"
 #include "TCanvas.h" // ROOT graphics class
 #include "TMultiGraph.h" // A TMultiGraph allows to manipulate a set of graphs as a single entity (from ROOT documentation)
 #include "TAxis.h"
 
 #include <vector>
 #include "tpolynomial.h"
-// #include "tplot.h"
 
 class TSegment
 {
 public:
     TSegment(TData*, size_t, size_t);
     ~TSegment();
-
-    // friend TPlot::TPlot(TSegment, int, int);
 
     void display_ages_vector();
     void display_depths_vector();
@@ -42,7 +36,6 @@ public:
     void copy_ages_to_segment();
     void copy_depths_to_segment();
     void lsr_smoothing();
-    // void plot_to_png(std::string);
 
     /* setter functions */
     void set_ages(double);
@@ -98,15 +91,7 @@ private:
 
     TGraph* g1{nullptr};
     TGraph* g2{nullptr};
-
-    /*TCanvas* cnv = new TCanvas("cnv", "cnv", 0, 0, 1200, 800);
-    TMultiGraph* multi1 = new TMultiGraph();
-    TMultiGraph* multi2 = new TMultiGraph();
-    TGraph* g1{nullptr};
-    TGraph* g2{nullptr};
-    TGraph* g3{nullptr};
-    TGraph* g4{nullptr};*/
-
+    
     std::vector<TPolynomial*> fit{};
 };
 

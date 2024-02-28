@@ -14,7 +14,7 @@ TPlot::TPlot(int n, std::vector<TSegment> s) : graphs(new TGraph[n]), graphs_siz
 {
     for (int i = 0; i < graphs_size; i++)
     {
-        graphs[i] = *s[i].get_g2_pretty_ptr();
+        graphs[i] = *s[i].get_g2_ptr_pretty();
     }
 }
 
@@ -363,4 +363,19 @@ size_t TPlot::get_lsr_ages_vector_size()
 double TPlot::get_lsr_plot_age(int i)
 {
     return this->lsr_plot_ages[i];
+}
+
+double TPlot::get_lsr_plot_value(int i)
+{
+    return this->lsr_plot_values[i];
+}
+
+double TPlot::get_smoothed_lsr_plot_value(int i)
+{
+    return this->smoothed_lsr_plot_values[i];
+}
+
+int TPlot::get_graphs_size()
+{
+    return this->graphs_size;
 }
